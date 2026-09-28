@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+  GENERATED FILE - do not edit. Source: params/params.yaml
+  params_sha256: {{ sha }}
+  configuration: {{ config }}   schema_version: {{ meta.schema_version }}
+  Frame: Gazebo FLU (x fwd, y left, z up). Converted from FRD in sim/gen_sdf.py.
+  Regenerate with:  make sdf   (python3 sim/gen_sdf.py, config={{ config }})
+-->
+<sdf version="1.9">
+  <model name="prandtl_amph">
+    <pose>0 0 0.2 0 0 0</pose>
+
+    <link name="base_link">
+      <!-- CG of the {{ config }} configuration, relative to the airframe CG (FLU) -->
+      <inertial>
+        <pose>{{ '%.6f'|format(cg_flu[0]) }} {{ '%.6f'|format(cg_flu[1]) }} {{ '%.6f'|format(cg_flu[2]) }} 0 0 0</pose>
+        <mass>{{ '%.4f'|format(mass) }}</mass>
+        <inertia>
+          <ixx>{{ '%.6f'|format(I.Ixx) }}</ixx>
+          <ixy>0</ixy>
+          <ixz>{{ '%.6f'|format(ixz_sdf) }}</ixz>
+          <iyy>{{ '%.6f'|format(I.Iyy) }}</iyy>
+          <iyz>0</iyz>
+          <izz>{{ '%.6f'|format(I.Izz) }}</izz>
+        </inertia>
+      </inertial>
+
+      <!-- visual: placeholder box; replace geometry/mesh with the 2.89 m OML -->
+      <visual name="fuselage_visual">
+        <geometry><box><size>{{ '%.3f'|format(geom.L_fus) }} 0.20 0.22</size></box></geometry>
+      </visual>
+      <visual name="wing_visual">
+        <pose>0 0 0.05 0 0 0</pose>
+        <geometry><box><size>{{ '%.3f'|format(geom.c_bar) }} {{ '%.3f'|format(geom.b) }} 0.02</size></box></geometry>
+      </visual>
+
+      {% if hull_boxes %}
+      <!-- hull buoyancy boxes (Plan 2, W2): one link, few box primitives -->
+      {% for hb in hull_boxes %}
+      <collision name="hull_{{ loop.index }}">
+        <pose>{{ hb.pose }}</pose>
+        <geometry><box><size>{{ hb.size }}</size></box></geometry>
+      </collision>
+      {% endfor %}
+      {% else %}
+      <!-- no hull boxes yet: single collision for ground contact only -->
+      <collision name="fuselage_collision">
+        <geometry><box><size>{{ '%.3f'|format(geom.L_fus) }} 0.20 0.22</size></box></geometry>
+      </collision>
+      {% endif %}
+
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on><update_rate>250</update_rate>
+      </sensor>
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on><update_rate>50</update_rate>
+      </sensor>
+      <sensor name="air_speed_sensor" type="air_speed">
+        <always_on>1</always_on><update_rate>50</update_rate>
+      </sensor>
+    </link>
+
+    <!--
+      AdvancedLiftDrag: tag names per the gz-sim API reference
+      (gz::sim::systems::AdvancedLiftDrag). All derivatives per radian.
+      Lateral signs: verify with the W3 parity test, then set LATERAL_SIGN in
+      sim/gen_sdf.py. Control-surface blocks: copy the exact XML layout from
+      the pinned PX4-gazebo-models advanced_plane/model.sdf.
+    -->
+    <plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
+      <link_name>base_link</link_name>
+      <rho>{{ rho }}</rho>
+      <area>{{ geom.S }}</area>
+      <AR>{{ geom.AR }}</AR>
+      <mac>{{ geom.c_bar }}</mac>
+      <eff>{{ geom.oswald_e }}</eff>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <cp>0 0 0</cp>
+
+      <CL0>{{ lon.CL0 }}</CL0>
+      <CD0>{{ CD0 }}</CD0>
+      <Cem0>{{ lon.Cm0 }}</Cem0>
+      <CLa>{{ lon.CL_alpha }}</CLa>
+      <CYa>0</CYa>
+      <Cella>0</Cella>
+      <Cema>{{ lon.Cm_alpha }}</Cema>
+      <Cena>0</Cena>
+      <CLb>0</CLb>
+      <CYb>{{ lat.CY_beta }}</CYb>
+      <Cellb>{{ lat.Cl_beta }}</Cellb>
+      <Cemb>0</Cemb>
+      <Cenb>{{ lat.Cn_beta }}</Cenb>
+      <alphaStall>{{ '%.5f'|format(alpha_stall) }}</alphaStall>
+      <CemaStall>0</CemaStall>
+      <M>{{ blend_M }}</M>
+      <CDp>0</CDp><CYp>{{ lat.CY_p }}</CYp><CLp>0</CLp><Cellp>{{ lat.Cl_p }}</Cellp><Cenp>{{ lat.Cn_p }}</Cenp>
+      <CDq>0</CDq><CYq>0</CYq><CLq>{{ lon.CL_q }}</CLq><Cellq>0</Cellq><Cemq>{{ lon.Cm_q }}</Cemq><Cenq>0</Cenq>
+      <CDr>0</CDr><CYr>{{ lat.CY_r }}</CYr><CLr>0</CLr><Cellr>{{ lat.Cl_r }}</Cellr><Cemr>0</Cemr><Cenr>{{ lat.Cn_r }}</Cenr>
+      <!-- induced drag handled by the plugin from CL, AR, eff; K = 1/(pi AR e) = {{ '%.4f'|format(1/(3.14159265*geom.AR*geom.oswald_e)) }} vs polar K = {{ K }} -->
+
+      <num_ctrl_surfaces>4</num_ctrl_surfaces>
+      <!-- 0 elevator (rear wing), 1 aileron left, 2 aileron right, 3 rudder.
+           Copy the <control_surface> layout from advanced_plane; derivatives: -->
+      <!-- elevator:  CL_ctrl {{ lon.CL_de }}  CD_ctrl {{ lon.CD_de }}  Cem_ctrl {{ lon.Cm_de }} -->
+      <!-- aileron :  CY_ctrl {{ lat.CY_da }}  Cell_ctrl {{ lat.Cl_da }}  Cen_ctrl {{ lat.Cn_da }}  (split +/- between the two surfaces) -->
+      <!-- rudder  :  CY_ctrl {{ lat.CY_dr }}  Cell_ctrl {{ lat.Cl_dr }}  Cen_ctrl {{ lat.Cn_dr }} -->
+    </plugin>
+
+    <!-- Motors: {{ n_motors }} tractors, thrust point at FLU {{ thrust_pt_flu }} relative to the {{ config }} CG.
+         Copy the motor-model plugin block from advanced_plane and duplicate it with opposite
+         turning directions at y = +/- (spacing from CAD). Thrust map must match matlab/propulsion.m
+         ({{ 'legacy_constant_power' }} for regression, momentum for design): verify with a 20 m/s tow test. -->
+
+    <!-- Control allocation mixing, [d_front; d_rear] = Mix * [de; dL]: {{ mix }} -->
+  </model>
+</sdf>

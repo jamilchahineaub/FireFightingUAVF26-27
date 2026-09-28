@@ -1,0 +1,14 @@
+# generated from params.yaml (regenerate with `make params` / `make sdf`)
+params/params.json
+sim/generated/
+# results and logs
+results/*.mat
+results/*.csv
+results/*.png
+*.ulg
+# editors / OS
+.DS_Store
+*.asv
+*.m~
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,230 @@
+# =============================================================================
+# params.yaml  --  SINGLE SOURCE OF TRUTH for the PrandtlPlane amphibious UAV
+# =============================================================================
+# Every number used by the MATLAB model, the Gazebo SDF generator and the PX4
+# parameter export comes from this file. Nobody types a number into a .m or
+# .sdf file by hand.
+#
+# Rules
+#   * SI units. Angles in radians unless the key ends in _deg.
+#   * Body frame is FRD (x forward, y right, z down). Inertial frame is NED.
+#     Gazebo uses FLU/ENU; the conversion happens ONLY inside sim/gen_sdf.py.
+#   * Every aerodynamic value carries a `source` tag:
+#       handbook               -- estimate used in the May-2026 drop study
+#       fit-to-reference-trims -- back-fitted so the model reproduces Table 3
+#       aerosonde-placeholder  -- Beard & McLain Aerosonde value, scaled. NOT
+#                                 a PrandtlPlane property. Replace with AVL.
+#       avl                    -- from the AVL box-wing model (none yet)
+#       cad                    -- from SolidWorks (none yet)
+#   * `PLACEHOLDER` in a comment means the value is a guess that lets the
+#     pipeline run. It must be replaced before results are presented as facts.
+#
+# Schema: params/schema.md. Bump schema_version on any structural change.
+# =============================================================================
+
+meta:
+  schema_version: 1
+  aircraft: prandtl_amph
+  description: "1:11 subscale PrandtlPlane amphibious UAV, AUB VIP Research"
+  units: SI
+  angles: "rad unless key ends _deg"
+  body_frame: FRD
+  inertial_frame: NED
+  reference_report: "Jamil Chahine, VIP Research Report, May 2026, Table 1 and Table 3"
+
+sign_conventions:
+  delta_e: "+ trailing edge down -> nose-down pitching moment (Cm_de < 0, CL_de > 0)"
+  delta_a: "+ produces positive (right-wing-down) rolling moment (Cl_da > 0)"
+  delta_r: "+ trailing edge left -> nose-left yawing moment (Cn_dr < 0)"
+  delta_L: "+ symmetric front+rear deflection -> lift increase, no pitch (direct lift)"
+  throttle: "0..1, fraction of full throttle"
+  alpha: "+ nose above relative wind"
+  beta: "+ relative wind from the right"
+  note_px4: "PX4 torque setpoints are +nose-up/+right-wing-down/+nose-right. Map by servo reversal in the actuator setup, never by negating gains."
+
+environment:
+  g: 9.81
+  rho_sl: 1.225              # sea-level ISA
+  rho_water: 998.0
+  isa: true                  # density from ISA at the trim altitude
+
+geometry:
+  b: 2.89                    # wingspan [m]  -- standard geometry; 2.0 m UE5 mesh is retired
+  S: 0.930                   # reference area [m^2]
+  c_bar: 0.322               # mean aerodynamic chord [m]
+  AR: 9.0
+  oswald_e: 0.68
+  L_fus: 1.49                # PLACEHOLDER: back-fitted so I_yy_airframe ~ 2.0 kg m^2, which
+                             # reproduces M_dT = +1.02 rad/s^2 of the drop study. CL-415
+                             # scaled 1:11 gives 1.80 m. Replace with CAD.
+
+mass_properties:
+  # Mass-station model used in the May-2026 study: airframe (structure+battery)
+  # as one body with radii of gyration, payload as a point mass below the CG.
+  # mass_props.m assembles the tensors by the parallel-axis theorem.
+  # When SolidWorks delivers the tensor, set `use_cad: true` and fill `cad`.
+  use_cad: false
+  airframe:
+    m: 9.96                  # structure 8.13 + battery 1.83 [kg]; rounded to 10 kg in analysis
+    m_rounded: 10.0
+    kx_over_b: 0.25          # source: handbook (mass-station model)
+    ky_over_Lfus: 0.30       # source: handbook
+    kz_rule: "sqrt(kx^2 + ky^2)"   # PLACEHOLDER flat-body approximation
+  payload:
+    m: 4.0                   # water [kg]
+    r_from_airframe_cg_frd: [0.0, 0.0, 0.12]   # tank 0.12 m BELOW airframe CG (+z down)
+  loaded:
+    m: 13.96
+    m_rounded: 14.0
+  unloaded:
+    m: 9.96
+    m_rounded: 10.0
+  use_rounded_mass: true     # the drop study rounded to 14 / 10 kg (trim change < 0.3%)
+  Ixz_airframe: 0.0          # PLACEHOLDER: off-diagonal unknown until CAD. Explicitly zero.
+  cad:                       # fill when SolidWorks is repaired
+    loaded:   {m: null, cg_frd: [null, null, null], Ixx: null, Iyy: null, Izz: null, Ixz: null}
+    unloaded: {m: null, cg_frd: [null, null, null], Ixx: null, Iyy: null, Izz: null, Ixz: null}
+
+aero:
+  stall:
+    CL_max: 1.37             # source: sizing tool
+    blend_M: 50.0            # sigmoid sharpness (Beard & McLain); PLACEHOLDER
+  drag_polar:
+    CD0: 0.0550              # source: sizing tool
+    K: 0.0520                # source: sizing tool  (CD = CD0 + K CL^2)
+  longitudinal:
+    CL0:      {value: 0.0,    source: fit-to-reference-trims}
+    CL_alpha: {value: 5.656,  source: handbook, note: "2*pi/(1+2/AR) * 1.10 box-wing coupling factor"}
+    CL_q:     {value: 7.95,   source: aerosonde-placeholder}
+    CL_de:    {value: 0.50,   source: fit-to-reference-trims}
+    CL_dL:    {value: 1.0,    source: aerosonde-placeholder, note: "symmetric front+rear; PLACEHOLDER until AVL"}
+    CD_de:    {value: 0.0,    source: aerosonde-placeholder}
+    Cm0:      {value: 0.0500, source: fit-to-reference-trims}
+    Cm_alpha: {value: -0.80,  source: handbook}
+    Cm_q:     {value: -12.0,  source: handbook}
+    Cm_de:    {value: -1.20,  source: handbook}
+    Cm_dL:    {value: 0.0,    source: aerosonde-placeholder, note: "ideal direct lift = zero pitch; AVL will give the real coupling"}
+  lateral:
+    # ALL aerosonde-placeholder (Beard & McLain, mavsim aerosonde_parameters).
+    # These are NOT PrandtlPlane numbers. Box wings are known to be marginal in
+    # directional stability; do not present any lateral result until AVL.
+    CY0:    {value: 0.0,    source: aerosonde-placeholder}
+    Cl0:    {value: 0.0,    source: aerosonde-placeholder}
+    Cn0:    {value: 0.0,    source: aerosonde-placeholder}
+    CY_beta: {value: -0.98,  source: aerosonde-placeholder}
+    Cl_beta: {value: -0.13,  source: aerosonde-placeholder}
+    Cn_beta: {value: 0.073,  source: aerosonde-placeholder}
+    CY_p:    {value: 0.0,    source: aerosonde-placeholder}
+    Cl_p:    {value: -0.51,  source: aerosonde-placeholder}
+    Cn_p:    {value: 0.069,  source: aerosonde-placeholder}
+    CY_r:    {value: 0.0,    source: aerosonde-placeholder}
+    Cl_r:    {value: 0.25,   source: aerosonde-placeholder}
+    Cn_r:    {value: -0.095, source: aerosonde-placeholder}
+    CY_da:   {value: 0.075,  source: aerosonde-placeholder}
+    Cl_da:   {value: 0.17,   source: aerosonde-placeholder}
+    Cn_da:   {value: -0.011, source: aerosonde-placeholder}
+    CY_dr:   {value: 0.19,   source: aerosonde-placeholder}
+    Cl_dr:   {value: 0.0024, source: aerosonde-placeholder}
+    Cn_dr:   {value: -0.069, source: aerosonde-placeholder}
+  mixing:
+    # PrandtlPlane pitch control. Autopilot commands [de, dL]; the mixer turns
+    # them into [d_front, d_rear]:  [d_front; d_rear] = Mix * [de; dL]
+    # Default: rear-wing surface acts as a conventional elevator, front surface
+    # only carries the symmetric (direct-lift) command. With dL = 0 this reduces
+    # EXACTLY to the conventional-elevator model above (test_aero checks it).
+    # After AVL: differential front/rear for pitch, symmetric for lift.
+    Mix: [[0.0, 1.0],
+          [1.0, 1.0]]
+    note: "aero.m uses de and dL directly with the derivatives above; Mix is exported to the SDF/PX4 control allocation."
+
+propulsion:
+  n_motors: 2
+  P_elec_max_each: 479.0     # W
+  P_elec_max_total: 959.0    # W (source: sizing tool, take-off + 10% margin)
+  eta_p: 0.70
+  eta_total: 0.5355
+  model: legacy_constant_power    # legacy_constant_power | momentum
+  legacy_constant_power:
+    # T = P_prop_max * dT / V.  Reproduces the May-2026 trims (27.9% / 24.4%)
+    # and the T = P/V thrust-speed coupling in X_u. NOT physically consistent:
+    # 1200 W propulsive > 959 W * eta_p = 671 W. Kept for the regression test.
+    P_prop_max: 1200.0
+    V_min: 5.0               # floor on V in the division, avoids blow-up at rest
+    source: "back-fit to reference trims"
+  momentum:
+    # T = a*dT^2 - b*dT*V  (linear C_T(J) per propeller, both motors summed)
+    # a = static thrust at full throttle = T/W * W
+    T_static_total: 33.6     # 0.2451 * 13.96 * 9.81 [N]
+    V_anchor: 20.0
+    T_anchor: 16.7           # cruise thrust (source: sizing tool)
+    dT_anchor: 0.75          # PLACEHOLDER: cruise throttle for the physical model; needs prop data
+    b: 0.1467                # derived: (a*dT_anchor^2 - T_anchor)/(V_anchor*dT_anchor)
+    P_check_W: 958.0         # T*V/eta_p must stay below this
+    source: "momentum-theory placeholder; replace with APC C_T(J) table"
+  thrust_line:
+    through: loaded_cg       # thrust line passes through the LOADED CG by design
+    r_thrust_from_loaded_cg_frd: [0.0, 0.0, 0.0]
+    # after the drop the CG rises by 0.0343 m, so the thrust line sits BELOW the
+    # unloaded CG: r = [0, 0, +0.0343] in FRD -> nose-up moment per unit thrust.
+    # mass_props.m computes this offset; do not hard-code it.
+
+actuators:
+  # first-order lag  d(delta)/dt = (sat(cmd) - delta)/tau, plus optional rate limit
+  elevator: {tau: 0.05, delta_max_deg: 20.0, rate_max_deg_s: 300.0}   # rate PLACEHOLDER
+  aileron:  {tau: 0.05, delta_max_deg: 20.0, rate_max_deg_s: 300.0}   # PLACEHOLDER limits
+  rudder:   {tau: 0.05, delta_max_deg: 25.0, rate_max_deg_s: 300.0}   # PLACEHOLDER limits
+  throttle: {tau: 0.05, min: 0.0, max: 1.0}                           # tau PLACEHOLDER (legacy: direct)
+  direct_lift: {tau: 0.05, delta_max_deg: 15.0, rate_max_deg_s: 300.0}  # PLACEHOLDER
+
+speeds:
+  V_cruise: 20.0
+  V_stall_loaded: 13.2
+  V_stall_unloaded: 11.2
+  approach_factor: 1.3
+  slow_factor: 1.1
+
+trim_reference:
+  # From the May-2026 report, Table 3. The regression test must reproduce these.
+  altitude_m: 100.0
+  cruise_loaded:   {V: 20.0, mass: loaded,   gamma_deg: 0.0, CL: 0.610, alpha_deg: 6.33, de_deg: -1.83, thrust_N: 16.74, dT: 0.279}
+  cruise_unloaded: {V: 20.0, mass: unloaded, gamma_deg: 0.0, CL: 0.436, alpha_deg: 4.46, de_deg: -0.59, thrust_N: 14.61, dT: 0.244}
+  # The report's trim is a STATIC balance (L = W, Cm_aero = 0, T = D): no thrust
+  # tilt, no thrust-line moment. static_trim.m must reproduce it to this tolerance:
+  tolerance:
+    alpha_deg: 0.02
+    de_deg: 0.02
+    dT: 0.001
+  # The full nonlinear trim (trim.m) includes thrust tilt and the thrust-line
+  # moment, so it differs from Table 3 by a known amount. Allowed deviation:
+  full_trim_tolerance:
+    alpha_deg: 0.15          # thrust tilt T sin(alpha) ~ 1.3% of weight
+    de_deg: 0.45             # unloaded: thrust-line moment T*0.0343/(qS c Cm_de) ~ 0.33 deg
+    dT: 0.006
+
+design_points:
+  # The six linearisation points of the plan (Plan 1, section h)
+  - {id: C14, mass: loaded,   V: 20.0, gamma_deg:  0.0, basis: cruise}
+  - {id: A14, mass: loaded,   V: 17.2, gamma_deg: -4.0, basis: "1.3 Vs"}
+  - {id: S14, mass: loaded,   V: 14.5, gamma_deg:  0.0, basis: "1.1 Vs"}
+  - {id: C10, mass: unloaded, V: 20.0, gamma_deg:  0.0, basis: cruise}
+  - {id: A10, mass: unloaded, V: 14.6, gamma_deg: -4.0, basis: "1.3 Vs"}
+  - {id: S10, mass: unloaded, V: 12.3, gamma_deg:  0.0, basis: "1.1 Vs"}
+
+hydro:
+  # Used only when the hull touches water (z_cg > -draft). Stub for now.
+  enabled: false
+  water_z_ned: 0.0
+  hull_boxes: []             # filled in the water-landing phase (Plan 2, W2)
+
+control_specs:
+  phase_margin_deg_min: 45.0
+  gain_margin_dB_min: 6.0
+  loop_separation_min: 5.0
+  rate_step_deg_s: 30.0
+  attitude_step_deg: 10.0
+  robustness:
+    Cm_alpha_scale: [0.7, 1.0, 1.3]
+    Cm_q_scale:     [0.7, 1.0, 1.3]
+    mass_scale:     [0.9, 1.0, 1.1]
+    pm_min_offnominal_deg: 40.0
+    gm_min_offnominal_dB: 5.0
