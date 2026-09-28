@@ -1,23 +1,11 @@
 #!/usr/bin/env python3
-"""Generate the Gazebo model SDF for prandtl_amph from params/params.yaml.
+"""Generate the Gazebo SDF for prandtl_amph from params/params.json.
 
     python3 sim/gen_sdf.py [--config loaded|unloaded] [--out DIR]
 
-Everything numeric in the SDF comes from params.yaml. The file header carries
-the YAML sha256 so a log can be tied to the exact parameter set.
-
-Frame conversion (the ONLY place it happens):
-    aircraft FRD  (x fwd, y right, z down)  ->  Gazebo FLU (x fwd, y left, z up)
-    R = diag(1, -1, -1)  (180 deg about x)
-    positions:  (x, y, z) -> (x, -y, -z)
-    inertia tensor element I_xz (FLU) = R11*R33*I_xz(FRD) = -I_xz_tensor(FRD)
-    and the aircraft convention Ixz = -I_xz_tensor, so SDF <ixz> = +Ixz_aircraft.
-
-Aerodynamic coefficient signs: AdvancedLiftDrag defines alpha, beta, p, q, r
-and the moment directions in its own code, not by the link frame. The
-lateral signs below default to +1 and MUST be confirmed by the W3 parity test
-(same alpha, V -> lift and Cm within 5 % of aero.m). Flip entries in
-LATERAL_SIGN once the test says so; never edit the generated SDF by hand.
+FRD -> FLU: (x, y, z) -> (x, -y, -z). SDF <ixz> = +Ixz (aircraft convention).
+Lateral coefficient signs in LATERAL_SIGN are unverified; set them from the
+AdvancedLiftDrag vs aero.m parity test. Don't edit the generated SDF by hand.
 """
 import argparse
 import json

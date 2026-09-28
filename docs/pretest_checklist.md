@@ -1,6 +1,6 @@
-# Pre-test verification checklist (Plan 2, section 2.9)
+# Pre-test checklist
 
-Owner: Michael. Mark each item PASS/FAIL with the date. Nothing flies a control test until every row is PASS on the pinned stack.
+Owner: Michael. Mark PASS/FAIL with the date.
 
 | # | Item | Pass criterion | Status | Date |
 |---|---|---|---|---|
@@ -33,7 +33,7 @@ Owner: Michael. Mark each item PASS/FAIL with the date. Nothing flies a control 
 | 27 | Cessna regression (S2) | takeoff → loiter → land | | |
 | 28 | Two batch runs, same seed | touchdown metrics within 1 % | | |
 
-## Smoke tests (Plan 2, section 2.3)
+## Smoke tests
 
 | # | Action | Pass | Status |
 |---|---|---|---|
@@ -46,12 +46,12 @@ Owner: Michael. Mark each item PASS/FAIL with the date. Nothing flies a control 
 | S7 | `HEADLESS=1 make px4_sitl gz_advanced_plane` + scripted mission | | |
 | S8 | `PX4_GZ_STANDALONE=1` mode | connects once gz server is up | |
 
-## Water bring-up (Plan 2, section 2.6)
+## Water bring-up
 
 | Test | Setup | Pass | Status |
 |---|---|---|---|
 | W1 | 0.5×0.3×0.3 m box, 10 kg, dropped 0.2 m, DART + bullet collision, one buoyancy grade | draft 0.0668 m ±2 %, heave ω ≈ 12.1 rad/s ±5 %, no NaN, RTF ≥ 1 | |
 | W1b | add `<zW>` ≈ −73 for ζ ≈ 0.3 | log-decrement ζ = 0.30 ±0.05 | |
-| W2 | one link, 3–5 hull boxes, 14 then 10 kg | displaced volume = m/ρ, static pitch matches, stable 60 s | |
+| W2 | one link, 3-5 hull boxes, 14 then 10 kg | displaced volume = m/ρ, static pitch matches, stable 60 s | |
 | W3 | + wings + AdvancedLiftDrag, drop at trim from 10 m, no PX4 | lift and Cm within 5 % of `aero.m` at same α, V | |
-| W4 | + PX4 airframe 4099, world `water` | floats at correct draft before arming; S1–S3 equivalents pass | |
+| W4 | + PX4 airframe 4099, world `water` | floats at correct draft before arming; S1-S3 equivalents pass | |

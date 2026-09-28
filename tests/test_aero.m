@@ -2,7 +2,7 @@ function [pass, msg] = test_aero()
 %TEST_AERO  Checks on the aerodynamic build-up.
 %  1. At alpha = 0, zero rates, zero surfaces: CL = CL0, CD = CD0, Cm = Cm0.
 %  2. Lift slope numerically equals CL_alpha in the linear region.
-%  3. Stall cap: CL never exceeds ~CL_max by more than the blend overshoot.
+%  3. Peak of the blended lift curve equals CL_max.
 %  4. Sign conventions: +de -> Cm decreases; +da -> Cl increases; +dr -> Cn decreases.
 %  5. Conventional-elevator equivalence: dL = 0 gives exactly the classic model.
 %  6. Static lift = weight check at the reference cruise CL.

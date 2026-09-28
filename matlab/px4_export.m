@@ -10,15 +10,8 @@ function px4_export(gains, outfile, P)
 %   .airspd_trim  design airspeed [m/s]
 %   .rate_max   struct with roll, pitch_pos, pitch_neg, yaw  [deg/s]
 %
-% Conversion (see docs/decisions.md D-03):
-%   PX4 rate gains are normalised actuator per rad/s; the mixer maps +-1 to
-%   +-delta_max, so  K_PX4 = K_MATLAB / delta_max[rad].
-%   Signs: PX4 +pitch torque is nose-up while our +de is nose-down; this is
-%   handled by servo reversal in the airframe actuator setup, NOT here.
-%
-% The parameter NAMES below are from the PX4 v1.15/1.16 reference. Confirm
-% every one in the pinned SITL (`param show FW_RR* FW_PR* FW_YR* FW_R_TC FW_P_TC
-% FW_AIRSPD_TRIM FW_*RMAX*`) before flying; names change between releases.
+% Conversion (D-03): K_PX4 = K_MATLAB / delta_max[rad]. Signs are handled by
+% servo reversal, not here. Confirm names with `param show` in the pinned SITL.
 %
 % File format (QGC): "<vehicle_id> <component_id> <name> <value> <type>", type 9 = float.
 

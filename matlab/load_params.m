@@ -4,14 +4,11 @@ function P = load_params(jsonfile)
 %   P = load_params()            reads <repo>/params/params.json
 %   P = load_params(file)        reads a specific JSON file
 %
-% Derived fields (computed here, never stored in the YAML):
+% Derived fields:
 %   P.mass.loaded / P.mass.unloaded  : m, cg (FRD, from airframe CG), J (3x3), r_thrust
 %   P.act.<name>.delta_max (rad), rate_max (rad/s)
 %   P.aero.lon.<name>, P.aero.lat.<name>  : plain numbers (source tags in P.aero.src)
-%   P.meta.sha256                    : hash of params.yaml (recorded in every log)
-%
-% Angles in the YAML are degrees only where the key ends in _deg; everything
-% here is converted to radians.
+%   P.meta.sha256                    : hash of params.yaml
 
     here = fileparts(mfilename('fullpath'));
     if nargin < 1
@@ -43,10 +40,7 @@ function P = load_params(jsonfile)
     P.aero.K      = raw.aero.drag_polar.K;
     P.aero.CL_max = raw.aero.stall.CL_max;
     P.aero.blend_M = raw.aero.stall.blend_M;
-    % alpha_stall_lin: where the linear lift line reaches CL_max.
-    % alpha_stall: centre of the sigmoid blend, calibrated so that the PEAK of
-    % the blended lift curve equals CL_max (the raw B&M blend would otherwise
-    % cap CL at ~0.75 CL_max and silently raise the stall speed by 15 %).
+    % blend centre solved so peak CL = CL_max (D-04)
     P.aero.alpha_stall_lin = (P.aero.CL_max - P.aero.lon.CL0) / P.aero.lon.CL_alpha;
     P.aero.alpha_stall = calibrate_stall(P.aero.lon.CL0, P.aero.lon.CL_alpha, ...
                                          P.aero.CL_max, P.aero.blend_M);
