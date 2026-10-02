@@ -2,7 +2,7 @@
 
 ## Michael: simulation
 
-- [ ] Set up PX4 + Gazebo Harmonic (Ubuntu 24.04, PX4 v1.17; check the stock Cessna flies and logs open in PlotJuggler)
+- [x] Set up PX4 + Gazebo Harmonic (Ubuntu 24.04, PX4 v1.17; check the stock Cessna flies and logs open in PlotJuggler)
 - [ ] Get our plane flying in Gazebo (copy `advanced_plane`, load the SDF from `make sdf`, add control surfaces and both motors)
 - [ ] Make it float (water world at z = 0, hull as a few boxes, DART physics; a plain box should sit at the right depth first)
 - [ ] Check Gazebo aero matches MATLAB (same angle of attack and speed should give the same lift and pitching moment, within 5 %)
