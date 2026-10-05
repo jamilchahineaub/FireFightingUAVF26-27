@@ -1,0 +1,496 @@
+{
+ "meta": {
+  "schema_version": 1,
+  "aircraft": "cl415",
+  "description": "2.51 m span scaled CL-415 water bomber UAV (about 1:11.5), NACA 4417 wing, 10.5 kg with 3 L of water",
+  "units": "SI",
+  "angles": "rad unless key ends _deg",
+  "body_frame": "FRD",
+  "inertial_frame": "NED",
+  "reference_report": "cl415/flight_params/report.md",
+  "sha256": "c37151fbc24d35f53edf0d7c5925d65f52990f3c01ecaedfdb1399418cf1c62e",
+  "source_file": "cl415_params.yaml"
+ },
+ "sign_conventions": {
+  "delta_e": "+ trailing edge down -> nose-down pitching moment (Cm_de < 0, CL_de > 0)",
+  "delta_a": "+ produces positive (right-wing-down) rolling moment (Cl_da > 0): left aileron TE down, right TE up",
+  "delta_r": "+ trailing edge left -> nose-left yawing moment (Cn_dr < 0)",
+  "delta_L": "not used on the CL-415 (no direct-lift surface)",
+  "throttle": "0..1, fraction of full throttle",
+  "alpha": "+ nose above relative wind",
+  "beta": "+ relative wind from the right",
+  "note_px4": "PX4 torque +nose-up/+right-wing-down/+nose-right; handle with servo reversal",
+  "note_gazebo": "the Gazebo model (cl415_description) uses ailerons + = TE down on each side, rudder + = TE left"
+ },
+ "environment": {
+  "g": 9.81,
+  "rho_sl": 1.225,
+  "rho_water": 998.0,
+  "isa": true
+ },
+ "geometry": {
+  "b": 2.51,
+  "S": 0.69804,
+  "c_bar": 0.278,
+  "AR": 9.0255,
+  "oswald_e": 0.928,
+  "L_fus": 1.688
+ },
+ "mass_properties": {
+  "use_cad": true,
+  "airframe": {
+   "m": 7.5,
+   "m_rounded": 7.5,
+   "kx_over_b": 0.1573,
+   "ky_over_Lfus": 0.1998,
+   "kz_rule": "SolidWorks tensor, not a rule"
+  },
+  "payload": {
+   "m": 3,
+   "r_from_airframe_cg_frd": [
+    0.008434,
+    1.45e-06,
+    0.1218
+   ]
+  },
+  "loaded": {
+   "m": 10.5,
+   "m_rounded": 10.5
+  },
+  "unloaded": {
+   "m": 7.5,
+   "m_rounded": 7.5
+  },
+  "use_rounded_mass": false,
+  "Ixz_airframe": 0.04662,
+  "cad": {
+   "loaded": {
+    "m": 10.5,
+    "cg_frd": [
+     0.00241,
+     4.143e-07,
+     0.03481
+    ],
+    "Ixx": 1.2097,
+    "Iyy": 0.89723,
+    "Izz": 1.89,
+    "Ixz": 0.04882
+   },
+   "unloaded": {
+    "m": 7.5,
+    "cg_frd": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "Ixx": 1.1698,
+    "Iyy": 0.85286,
+    "Izz": 1.8744,
+    "Ixz": 0.04662
+   }
+  }
+ },
+ "aero": {
+  "stall": {
+   "CL_max": 1.236,
+   "blend_M": 50.0
+  },
+  "drag_polar": {
+   "CD0": 0.03278,
+   "K": 0.038
+  },
+  "longitudinal": {
+   "CL0": {
+    "value": 0.51049,
+    "source": "avl",
+    "note": "body alpha = 0, includes 2.65 deg wing incidence and camber"
+   },
+   "CL_alpha": {
+    "value": 5.5928,
+    "source": "avl"
+   },
+   "CL_q": {
+    "value": 9.984,
+    "source": "avl"
+   },
+   "CL_de": {
+    "value": 0.74309,
+    "source": "avl+xfoil",
+    "note": "avl x 0.903 viscous flap factor"
+   },
+   "CL_dL": {
+    "value": 0,
+    "source": "n/a",
+    "note": "no direct-lift surface"
+   },
+   "CD_de": {
+    "value": 0.010544,
+    "source": "xfoil",
+    "note": "elevator section drag at 10 deg scaled by elevator area"
+   },
+   "Cm0": {
+    "value": 0.05539,
+    "source": "avl",
+    "note": "about the full-tank CG"
+   },
+   "Cm_alpha": {
+    "value": -1.5343,
+    "source": "avl",
+    "note": "static margin 27 % MAC"
+   },
+   "Cm_q": {
+    "value": -20.83,
+    "source": "avl"
+   },
+   "Cm_de": {
+    "value": -2.102,
+    "source": "avl+xfoil",
+    "note": "avl x 0.903 viscous flap factor"
+   },
+   "Cm_dL": {
+    "value": 0,
+    "source": "n/a",
+    "note": "no direct-lift surface"
+   }
+  },
+  "lateral": {
+   "CY0": {
+    "value": 0,
+    "source": "symmetry"
+   },
+   "Cl0": {
+    "value": 0,
+    "source": "symmetry"
+   },
+   "Cn0": {
+    "value": 0,
+    "source": "symmetry",
+    "note": "prop torque and swirl not included"
+   },
+   "CY_beta": {
+    "value": -0.46993,
+    "source": "avl"
+   },
+   "Cl_beta": {
+    "value": -0.06012,
+    "source": "avl"
+   },
+   "Cn_beta": {
+    "value": 0.072001,
+    "source": "avl",
+    "note": "hull as an AVL slender body; without it 0.152"
+   },
+   "CY_p": {
+    "value": -0.009409,
+    "source": "avl"
+   },
+   "Cl_p": {
+    "value": -0.54922,
+    "source": "avl"
+   },
+   "Cn_p": {
+    "value": -0.029423,
+    "source": "avl"
+   },
+   "CY_r": {
+    "value": 0.20218,
+    "source": "avl"
+   },
+   "Cl_r": {
+    "value": 0.18092,
+    "source": "avl"
+   },
+   "Cn_r": {
+    "value": -0.11983,
+    "source": "avl"
+   },
+   "CY_da": {
+    "value": -0.011314,
+    "source": "avl+xfoil",
+    "note": "avl x 0.830 viscous flap factor"
+   },
+   "Cl_da": {
+    "value": 0.2083,
+    "source": "avl+xfoil",
+    "note": "avl x 0.830 viscous flap factor"
+   },
+   "Cn_da": {
+    "value": -0.012312,
+    "source": "avl+xfoil",
+    "note": "avl x 0.830 viscous flap factor"
+   },
+   "CY_dr": {
+    "value": 0.22206,
+    "source": "avl+xfoil",
+    "note": "avl x 0.832 viscous flap factor"
+   },
+   "Cl_dr": {
+    "value": 0.024213,
+    "source": "avl+xfoil",
+    "note": "avl x 0.832 viscous flap factor"
+   },
+   "Cn_dr": {
+    "value": -0.079978,
+    "source": "avl+xfoil",
+    "note": "avl x 0.832 viscous flap factor"
+   }
+  },
+  "mixing": {
+   "Mix": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.0
+    ]
+   ]
+  }
+ },
+ "propulsion": {
+  "n_motors": 2,
+  "P_elec_max_each": 1018,
+  "P_elec_max_total": 2035,
+  "eta_p": 0.696,
+  "eta_total": 0.557,
+  "model": "momentum",
+  "legacy_constant_power": {
+   "P_prop_max": 303.7,
+   "V_min": 5.0,
+   "source": "n/a for the CL-415, use momentum"
+  },
+  "momentum": {
+   "T_static_total": 102.2,
+   "V_anchor": 20.0,
+   "T_anchor": 7.964,
+   "dT_anchor": 0.5244,
+   "b": 1.921,
+   "P_check_W": 2035,
+   "source": "apc 13.5x10.5-4 (scaled 155x12-4) data + Hacker A50-16S V4 motor model on 6S, flight_params/propulsion"
+  },
+  "thrust_line": {
+   "through": "prop_hubs",
+   "r_thrust_from_loaded_cg_frd": [
+    0.2649,
+    0.0,
+    -0.1613
+   ]
+  }
+ },
+ "actuators": {
+  "elevator": {
+   "tau": 0.03,
+   "delta_max_deg": 25.0,
+   "rate_max_deg_s": 500.0
+  },
+  "aileron": {
+   "tau": 0.03,
+   "delta_max_deg": 25.0,
+   "rate_max_deg_s": 500.0
+  },
+  "rudder": {
+   "tau": 0.03,
+   "delta_max_deg": 30.0,
+   "rate_max_deg_s": 500.0
+  },
+  "throttle": {
+   "tau": 0.05,
+   "min": 0.0,
+   "max": 1.0
+  },
+  "direct_lift": {
+   "tau": 0.05,
+   "delta_max_deg": 0.0,
+   "rate_max_deg_s": 0.0
+  }
+ },
+ "speeds": {
+  "V_cruise": 20.0,
+  "V_stall_loaded": 13.93,
+  "V_stall_unloaded": 11.8,
+  "approach_factor": 1.3,
+  "slow_factor": 1.1
+ },
+ "trim_reference": {
+  "altitude_m": 100.0,
+  "cruise_loaded": {
+   "V": 20.0,
+   "mass": "loaded",
+   "gamma_deg": 0.0,
+   "CL": 0.6081,
+   "alpha_deg": 0.8854,
+   "de_deg": 0.8635,
+   "thrust_N": 7.96,
+   "dT": 0.5244
+  },
+  "cruise_unloaded": {
+   "V": 20.0,
+   "mass": "unloaded",
+   "gamma_deg": 0.0,
+   "CL": 0.4344,
+   "alpha_deg": -1.086,
+   "de_deg": 2.302,
+   "thrust_N": 6.839,
+   "dT": 0.5077
+  },
+  "tolerance": {
+   "alpha_deg": 0.02,
+   "de_deg": 0.02,
+   "dT": 0.001
+  },
+  "full_trim_tolerance": {
+   "alpha_deg": 0.3,
+   "de_deg": 2.0,
+   "dT": 0.01
+  }
+ },
+ "design_points": [
+  {
+   "id": "CL",
+   "mass": "loaded",
+   "V": 20.0,
+   "gamma_deg": 0.0,
+   "basis": "cruise"
+  },
+  {
+   "id": "AL",
+   "mass": "loaded",
+   "V": 18.1,
+   "gamma_deg": -4.0,
+   "basis": "1.3 Vs"
+  },
+  {
+   "id": "SL",
+   "mass": "loaded",
+   "V": 15.3,
+   "gamma_deg": 0.0,
+   "basis": "1.1 Vs"
+  },
+  {
+   "id": "CU",
+   "mass": "unloaded",
+   "V": 20.0,
+   "gamma_deg": 0.0,
+   "basis": "cruise"
+  },
+  {
+   "id": "AU",
+   "mass": "unloaded",
+   "V": 15.3,
+   "gamma_deg": -4.0,
+   "basis": "1.3 Vs"
+  },
+  {
+   "id": "SU",
+   "mass": "unloaded",
+   "V": 13.0,
+   "gamma_deg": 0.0,
+   "basis": "1.1 Vs"
+  }
+ ],
+ "hydro": {
+  "enabled": false,
+  "water_z_ned": 0.0,
+  "hull_boxes": [
+   {
+    "center_frd": [
+     0.6104,
+     1.45e-06,
+     0.1144
+    ],
+    "size": [
+     0.125,
+     0.1119,
+     0.1492
+    ]
+   },
+   {
+    "center_frd": [
+     0.4629,
+     1.45e-06,
+     0.08554
+    ],
+    "size": [
+     0.17,
+     0.1991,
+     0.2651
+    ]
+   },
+   {
+    "center_frd": [
+     0.1578,
+     1.45e-06,
+     0.09609
+    ],
+    "size": [
+     0.4401,
+     0.2101,
+     0.2892
+    ]
+   },
+   {
+    "center_frd": [
+     -0.2172,
+     1.45e-06,
+     0.07693
+    ],
+    "size": [
+     0.3099,
+     0.198,
+     0.2509
+    ]
+   },
+   {
+    "center_frd": [
+     -0.5221,
+     1.45e-06,
+     0.05806
+    ],
+    "size": [
+     0.3,
+     0.1202,
+     0.2131
+    ]
+   },
+   {
+    "center_frd": [
+     -0.8434,
+     1.45e-06,
+     0.03832
+    ],
+    "size": [
+     0.3425,
+     0.03812,
+     0.1697
+    ]
+   }
+  ]
+ },
+ "control_specs": {
+  "phase_margin_deg_min": 45.0,
+  "gain_margin_dB_min": 6.0,
+  "loop_separation_min": 5.0,
+  "rate_step_deg_s": 30.0,
+  "attitude_step_deg": 10.0,
+  "robustness": {
+   "Cm_alpha_scale": [
+    0.7,
+    1.0,
+    1.3
+   ],
+   "Cm_q_scale": [
+    0.7,
+    1.0,
+    1.3
+   ],
+   "mass_scale": [
+    0.9,
+    1.0,
+    1.1
+   ],
+   "pm_min_offnominal_deg": 40.0,
+   "gm_min_offnominal_dB": 5.0
+  }
+ }
+}

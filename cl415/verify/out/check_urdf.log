@@ -1,0 +1,20 @@
+== check_urdf tank:=full
+robot name is: cl415
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 10 child(ren)
+    child(1):  fuselage
+    child(2):  h_stab
+links: 23
+sdf links: 7, joints: 6, plugins: 12
+Valid.
+gz sdf -k: valid
+== check_urdf tank:=empty
+robot name is: cl415
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 10 child(ren)
+    child(1):  fuselage
+    child(2):  h_stab
+links: 23
+sdf links: 7, joints: 6, plugins: 12
+Valid.
+gz sdf -k: valid

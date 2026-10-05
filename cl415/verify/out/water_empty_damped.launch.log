@@ -1,0 +1,67 @@
+[INFO] [launch]: All log files can be found below /home/test/.ros/log/2026-10-03-20-10-55-798810-jimmy-843
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [862]
+[INFO] [robot_state_publisher-2]: process started with pid [863]
+[INFO] [create-3]: process started with pid [865]
+[INFO] [parameter_bridge-4]: process started with pid [866]
+[create-3] [INFO] [1791047456.731416942] [ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-2] [INFO] [1791047456.733208494] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1791047457.295923809] [ros_gz_sim]: Waiting messages on topic [robot_description].
+[create-3] [INFO] [1791047457.310041389] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 865]
+[parameter_bridge-4] [INFO] [1791047457.842533050] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.844162627] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/cl415/joint_states (gz.msgs.Model) -> /joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.848045459] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/cl415/odometry (gz.msgs.Odometry) -> /cl415/odometry (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.850496480] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/cl415/imu (gz.msgs.IMU) -> /cl415/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.851744605] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/cl415/cmd/left_aileron (std_msgs/msg/Float64) -> /cl415/cmd/left_aileron (gz.msgs.Double)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.852942945] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/cl415/cmd/right_aileron (std_msgs/msg/Float64) -> /cl415/cmd/right_aileron (gz.msgs.Double)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.853783696] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/cl415/cmd/elevator (std_msgs/msg/Float64) -> /cl415/cmd/elevator (gz.msgs.Double)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.854523078] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/cl415/cmd/rudder (std_msgs/msg/Float64) -> /cl415/cmd/rudder (gz.msgs.Double)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1791047457.858381919] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/cl415/command/motor_speed (actuator_msgs/msg/Actuators) -> /cl415/command/motor_speed (gz.msgs.Actuators)] (Lazy 0)
+[gazebo-1] [1;33m[Wrn] [MulticopterMotorModel.cc:295] [0m[1;33m<motorNumber> is depricated, [0m[1;33mplease use <actuator_number>.[0m
+[gazebo-1] [1;33m[Wrn] [MulticopterMotorModel.cc:295] [0m[1;33m<motorNumber> is depricated, [0m[1;33mplease use <actuator_number>.[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mGazebo Sim Server v[0m[1;32m8.9.0[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mLoading SDF world file[[0m[1;32m/home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf[0m[1;32m].[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServing entity system service on [[0m[1;32m/[0m[1;32mentity/system/add[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mCreate service on [[0m[1;32m/world/water/create[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mRemove service on [[0m[1;32m/world/water/remove[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/water/set_pose[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mPose service on [[0m[1;32m/world/water/set_pose_vector[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mLight configuration service on [[0m[1;32m/world/water/light_config[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mPhysics service on [[0m[1;32m/world/water/set_physics[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mSphericalCoordinates service on [[0m[1;32m/world/water/set_spherical_coordinates[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mEnable collision service on [[0m[1;32m/world/water/enable_collision[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mDisable collision service on [[0m[1;32m/world/water/disable_collision[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/water/visual_config[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mMaterial service on [[0m[1;32m/world/water/wheel_slip[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mLoaded level [[0m[1;32mdefault[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServing world controls on [[0m[1;32m/world/water[0m[1;32m/control], [[0m[1;32m/world/water[0m[1;32m/control/state] and [[0m[1;32m/world/water[0m[1;32m/playback/control][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServing GUI information on [[0m[1;32m/world/water[0m[1;32m/[0m[1;32mgui/info[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mWorld [[0m[1;32mwater[0m[1;32m] initialized with [[0m[1;32m1ms[0m[1;32m] physics profile.[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServing world SDF generation service on [[0m[1;32m/world/water[0m[1;32m/[0m[1;32mgenerate_world_sdf[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServing world names on [[0m[1;32m/gazebo/worlds[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mResource path add service on [[0m[1;32m/gazebo/resource_paths/add[0m[1;32m].[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mResource path get service on [[0m[1;32m/gazebo/resource_paths/get[0m[1;32m].[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mResource path resolve service on [[0m[1;32m/gazebo/resource_paths/resolve[0m[1;32m].[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mResource paths published on [[0m[1;32m/gazebo/resource_paths[0m[1;32m].[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mServer control service on [[0m[1;32m/server_control[0m[1;32m].[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mFound no publishers on /stats, adding root stats topic[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mFound no publishers on /clock, adding root clock topic[0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mJointPositionController subscribing to Double messages on [[0m[1;32m/cl415/cmd/left_aileron[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mJointPositionController subscribing to Double messages on [[0m[1;32m/cl415/cmd/right_aileron[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mJointPositionController subscribing to Double messages on [[0m[1;32m/cl415/cmd/elevator[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mJointPositionController subscribing to Double messages on [[0m[1;32m/cl415/cmd/rudder[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mOdometryPublisher publishing odometry on [[0m[1;32m/cl415/odometry[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;32m[Msg] [0m[1;32mOdometryPublisher publishing odometry with covariance on [[0m[1;32m/model/cl415/odometry_with_covariance[0m[1;32m][0m[1;32m[0m
+[gazebo-1] [1;33m[Wrn] [Buoyancy.cc:616] [0m[1;33mOnly <box> and <sphere> collisions are supported [0m[1;33mby the graded buoyancy option.[0m[1;33m[0m
+[ERROR] [gazebo-1]: process has died [pid 862, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf --force-version 8'].
+[gazebo-1] [1;32m[Msg] [0m[1;32mOdometryPublisher
+[INFO] [launch]: process[gazebo-1] was required: shutting down launched system
+[INFO] [parameter_bridge-4]: sending signal 'SIGINT' to process[parameter_bridge-4]
+[INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+[parameter_bridge-4] [INFO] [1791047496.157024456] [rclcpp]: signal_handler(signum=15)
+[parameter_bridge-4] [INFO] [1791047496.157452652] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-2] [INFO] [1791047496.167459534] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-2] [INFO] [1791047496.169818435] [rclcpp]: signal_handler(signum=15)
+[INFO] [parameter_bridge-4]: process has finished cleanly [pid 866]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 863]

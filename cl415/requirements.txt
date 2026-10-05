@@ -1,0 +1,13 @@
+# windows side (python 3.12): python -m venv .venv && .venv/Scripts/python -m pip install -r requirements.txt
+cadquery==2.8.0
+cadquery-ocp==7.9.3.1.1
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.11.2
+trimesh==5.1.1
+networkx==3.7
+rtree==1.4.1
+shapely==2.1.2
+fast_simplification==0.2.0
+mapbox_earcut==2.1.0
+pywin32==312        # solidworks com, cad/solidworks/build_sw.py only

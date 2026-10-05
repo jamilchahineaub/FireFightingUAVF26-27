@@ -1,0 +1,430 @@
+{
+ "parts": [
+  {
+   "name": "fuselage",
+   "link": "fuselage",
+   "mass": 2.08,
+   "desc": "Hull: composite skin, frames, step, wing saddle (1.70) plus wiring, connectors, plumbing and fasteners (0.38), spread over the hull skin",
+   "step": "cad/parts/fuselage.step",
+   "kind": "structure",
+   "rgb": [
+    0.95,
+    0.8,
+    0.1
+   ]
+  },
+  {
+   "name": "left_wing",
+   "link": "left_wing",
+   "mass": 0.5,
+   "desc": "Left wing half, foam core + glass skin + spar",
+   "step": "cad/parts/left_wing.step",
+   "kind": "structure",
+   "rgb": [
+    0.92,
+    0.92,
+    0.92
+   ]
+  },
+  {
+   "name": "right_wing",
+   "link": "right_wing",
+   "mass": 0.5,
+   "desc": "Right wing half",
+   "step": "cad/parts/right_wing.step",
+   "kind": "structure",
+   "rgb": [
+    0.92,
+    0.92,
+    0.92
+   ]
+  },
+  {
+   "name": "left_aileron",
+   "link": "left_aileron",
+   "mass": 0.035,
+   "desc": "Left aileron",
+   "step": "cad/parts/left_aileron.step",
+   "kind": "structure",
+   "rgb": [
+    0.85,
+    0.2,
+    0.15
+   ]
+  },
+  {
+   "name": "right_aileron",
+   "link": "right_aileron",
+   "mass": 0.035,
+   "desc": "Right aileron",
+   "step": "cad/parts/right_aileron.step",
+   "kind": "structure",
+   "rgb": [
+    0.85,
+    0.2,
+    0.15
+   ]
+  },
+  {
+   "name": "h_stab",
+   "link": "h_stab",
+   "mass": 0.14,
+   "desc": "H-stab incl. finlets",
+   "step": "cad/parts/h_stab.step",
+   "kind": "structure",
+   "rgb": [
+    0.92,
+    0.92,
+    0.92
+   ]
+  },
+  {
+   "name": "elevator",
+   "link": "elevator",
+   "mass": 0.06,
+   "desc": "Elevator (both halves + torque tube)",
+   "step": "cad/parts/elevator.step",
+   "kind": "structure",
+   "rgb": [
+    0.85,
+    0.2,
+    0.15
+   ]
+  },
+  {
+   "name": "v_stab",
+   "link": "v_stab",
+   "mass": 0.09,
+   "desc": "V-stab",
+   "step": "cad/parts/v_stab.step",
+   "kind": "structure",
+   "rgb": [
+    0.95,
+    0.8,
+    0.1
+   ]
+  },
+  {
+   "name": "rudder",
+   "link": "rudder",
+   "mass": 0.035,
+   "desc": "Rudder",
+   "step": "cad/parts/rudder.step",
+   "kind": "structure",
+   "rgb": [
+    0.85,
+    0.2,
+    0.15
+   ]
+  },
+  {
+   "name": "left_nacelle",
+   "link": "left_nacelle",
+   "mass": 0.1,
+   "desc": "Left nacelle fairing",
+   "step": "cad/parts/left_nacelle.step",
+   "kind": "structure",
+   "rgb": [
+    0.55,
+    0.57,
+    0.62
+   ]
+  },
+  {
+   "name": "right_nacelle",
+   "link": "right_nacelle",
+   "mass": 0.1,
+   "desc": "Right nacelle fairing",
+   "step": "cad/parts/right_nacelle.step",
+   "kind": "structure",
+   "rgb": [
+    0.55,
+    0.57,
+    0.62
+   ]
+  },
+  {
+   "name": "left_propeller",
+   "link": "left_propeller",
+   "mass": 0.05,
+   "desc": "Left 14x7 prop + spinner",
+   "step": "cad/parts/left_propeller.step",
+   "kind": "structure",
+   "rgb": [
+    0.12,
+    0.12,
+    0.12
+   ]
+  },
+  {
+   "name": "right_propeller",
+   "link": "right_propeller",
+   "mass": 0.05,
+   "desc": "Right 14x7 prop + spinner",
+   "step": "cad/parts/right_propeller.step",
+   "kind": "structure",
+   "rgb": [
+    0.12,
+    0.12,
+    0.12
+   ]
+  },
+  {
+   "name": "left_float",
+   "link": "left_float",
+   "mass": 0.13,
+   "desc": "Left float + pylon",
+   "step": "cad/parts/left_float.step",
+   "kind": "structure",
+   "rgb": [
+    0.2,
+    0.35,
+    0.75
+   ]
+  },
+  {
+   "name": "right_float",
+   "link": "right_float",
+   "mass": 0.13,
+   "desc": "Right float + pylon",
+   "step": "cad/parts/right_float.step",
+   "kind": "structure",
+   "rgb": [
+    0.2,
+    0.35,
+    0.75
+   ]
+  },
+  {
+   "name": "water_tank",
+   "link": "water_tank",
+   "mass": 0.25,
+   "desc": "Water tank, empty, with outlet valve",
+   "step": "cad/parts/water_tank.step",
+   "kind": "structure",
+   "rgb": [
+    0.7,
+    0.85,
+    0.95
+   ]
+  },
+  {
+   "name": "eq_left_motor",
+   "link": "left_nacelle",
+   "mass": 0.3,
+   "desc": "Left motor, 600-800 W outrunner",
+   "step": "cad/parts/eq_left_motor.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_right_motor",
+   "link": "right_nacelle",
+   "mass": 0.3,
+   "desc": "Right motor",
+   "step": "cad/parts/eq_right_motor.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_left_esc",
+   "link": "left_nacelle",
+   "mass": 0.07,
+   "desc": "Left ESC",
+   "step": "cad/parts/eq_left_esc.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_right_esc",
+   "link": "right_nacelle",
+   "mass": 0.07,
+   "desc": "Right ESC",
+   "step": "cad/parts/eq_right_esc.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_left_aileron_servo",
+   "link": "left_wing",
+   "mass": 0.035,
+   "desc": "Left aileron servo",
+   "step": "cad/parts/eq_left_aileron_servo.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_right_aileron_servo",
+   "link": "right_wing",
+   "mass": 0.035,
+   "desc": "Right aileron servo",
+   "step": "cad/parts/eq_right_aileron_servo.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_avionics",
+   "link": "fuselage",
+   "mass": 0.3,
+   "desc": "Avionics: FC, GPS, telemetry, RC receiver, power module, airspeed",
+   "step": "cad/parts/eq_avionics.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_elevator_servo",
+   "link": "fuselage",
+   "mass": 0.035,
+   "desc": "Elevator servo",
+   "step": "cad/parts/eq_elevator_servo.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_rudder_servo",
+   "link": "fuselage",
+   "mass": 0.035,
+   "desc": "Rudder servo",
+   "step": "cad/parts/eq_rudder_servo.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_door_servo",
+   "link": "fuselage",
+   "mass": 0.035,
+   "desc": "Tank door servo",
+   "step": "cad/parts/eq_door_servo.step",
+   "kind": "equipment",
+   "rgb": [
+    0.25,
+    0.25,
+    0.28
+   ]
+  },
+  {
+   "name": "eq_battery",
+   "link": "fuselage",
+   "mass": 2.0,
+   "desc": "Battery, 6S 16 Ah LiPo (355 Wh)",
+   "step": "cad/parts/eq_battery.step",
+   "kind": "equipment",
+   "rgb": [
+    0.85,
+    0.35,
+    0.1
+   ]
+  },
+  {
+   "name": "water_3L",
+   "link": "water_tank",
+   "mass": 3.0,
+   "desc": "Water, 3 L",
+   "step": "cad/parts/water_3L.step",
+   "kind": "water",
+   "rgb": [
+    0.15,
+    0.45,
+    0.95
+   ]
+  }
+ ],
+ "battery": {
+  "pos": [
+   0.033461311001439314,
+   0.0,
+   -0.09734864586532427
+  ],
+  "dims": [
+   0.197,
+   0.077,
+   0.064
+  ],
+  "log": [
+   {
+    "where": "hull floor, right ahead of the tank",
+    "pos": [
+     0.1410777000213126,
+     0.0,
+     -0.218
+    ],
+    "cg_empty": 17.67708498610329,
+    "cg_full": 19.761707866794467
+   },
+   {
+    "where": "tray on top of the water tank",
+    "pos": [
+     0.033461311001439314,
+     0.0,
+     -0.09734864586532427
+    ],
+    "cg_empty": 28.00000000000001,
+    "cg_full": 27.135218591006407
+   }
+  ],
+  "fit_m3": {
+   "outside_cavity": 0.0,
+   "water_tank": 0.0,
+   "eq_avionics": 0.0,
+   "eq_door_servo": 0.0,
+   "eq_elevator_servo": 0.0,
+   "eq_rudder_servo": 0.0
+  }
+ },
+ "cad_estimate": {
+  "empty": {
+   "mass": 7.5,
+   "cg": [
+    -0.07784000000000003,
+    2.8109662338625134e-06,
+    -0.06587891451887579
+   ],
+   "cg_pct_mac": 28.00000000000001
+  },
+  "full": {
+   "mass": 10.5,
+   "cg": [
+    -0.07543590768299782,
+    2.0078330241872273e-06,
+    -0.10067808505307257
+   ],
+   "cg_pct_mac": 27.135218591006407
+  }
+ }
+}

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.ulg
+# raw sim recordings, kept locally (hundreds of MB); the cut highlights and frames are tracked
+px4_sitl/flight_logs/hull_state*.jsonl
+px4_sitl/flight_logs/water_chase_*.mp4
+px4_sitl/flight_logs/water_tailcam_*.mp4

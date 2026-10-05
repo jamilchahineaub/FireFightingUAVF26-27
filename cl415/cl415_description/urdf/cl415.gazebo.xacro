@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!-- gazebo harmonic systems for the cl415. topics (gz side, bridged to ROS 2 by config/bridge.yaml):
+       /cl415/cmd/{left_aileron,right_aileron,elevator,rudder}  gz.msgs.Double, joint angle [rad]
+       /cl415/command/motor_speed                               gz.msgs.Actuators, velocity[0]=left, [1]=right [rad/s]
+       /cl415/joint_states  /cl415/odometry  /cl415/imu  /cl415/tf
+     sign conventions: ailerons and elevator positive = trailing edge down, rudder positive = trailing
+     edge left, so a right roll is left aileron +, right aileron -. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- aerodynamics (4 LiftDrag elements) and the two motors, numbers in cl415_generated.xacro -->
+  <xacro:lift_drag_plugins/>
+  <xacro:motor_plugins/>
+
+  <!-- servos: torque-mode pid on the joint angle, capped at the stall torque, gains from each surface's
+       hinge inertia (cl415_generated.xacro). velocity mode (use_velocity_commands) was dropped: next to the
+       Hydrodynamics system in Harmonic it let the elevator run through its target to the stop -->
+  <xacro:macro name="servo" params="name servo_p servo_i servo_d">
+    <gazebo>
+      <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+        <joint_name>${name}_joint</joint_name>
+        <topic>/cl415/cmd/${name}</topic>
+        <p_gain>${servo_p}</p_gain>
+        <i_gain>${servo_i}</i_gain>
+        <d_gain>${servo_d}</d_gain>
+        <i_max>${0.3 * servo_torque_max}</i_max>
+        <i_min>${-0.3 * servo_torque_max}</i_min>
+        <cmd_max>${servo_torque_max}</cmd_max>
+        <cmd_min>${-servo_torque_max}</cmd_min>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+  <xacro:servo name="left_aileron" servo_p="${servo_left_aileron_p}" servo_i="${servo_left_aileron_i}" servo_d="${servo_left_aileron_d}"/>
+  <xacro:servo name="right_aileron" servo_p="${servo_right_aileron_p}" servo_i="${servo_right_aileron_i}" servo_d="${servo_right_aileron_d}"/>
+  <xacro:servo name="elevator" servo_p="${servo_elevator_p}" servo_i="${servo_elevator_i}" servo_d="${servo_elevator_d}"/>
+  <xacro:servo name="rudder" servo_p="${servo_rudder_p}" servo_i="${servo_rudder_i}" servo_d="${servo_rudder_d}"/>
+
+  <gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>/cl415/joint_states</topic>
+    </plugin>
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/cl415/odometry</odom_topic>
+      <tf_topic>/cl415/tf</tf_topic>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <sensor name="imu" type="imu">
+      <always_on>true</always_on>
+      <update_rate>200</update_rate>
+      <topic>/cl415/imu</topic>
+    </sensor>
+  </gazebo>
+
+  <!-- hull on hard ground -->
+  <gazebo reference="fuselage">
+    <mu1>0.4</mu1>
+    <mu2>0.4</mu2>
+  </gazebo>
+
+  <!-- float test only: linear damping so the model settles on the water (zeta about 0.3 in heave).
+       the plugin has no idea where the water is, so it damps in the air too: keep it off for flying -->
+  <xacro:if value="$(arg water_damping)">
+    <gazebo>
+      <plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
+        <link_name>base_link</link_name>
+        <xU>-5</xU>
+        <yV>-20</yV>
+        <zW>-95</zW>
+        <kP>-1.5</kP>
+        <mQ>-4</mQ>
+        <nR>-1</nR>
+        <disable_coriolis>true</disable_coriolis>
+        <disable_added_mass>true</disable_added_mass>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+</robot>

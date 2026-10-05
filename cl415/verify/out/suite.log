@@ -1,0 +1,35 @@
+
+Summary: 1 package finished [1.59s]
+GZ_SIM_RESOURCE_PATH after sourcing: /home/test/cl415_ws/install/cl415_description/share:/opt/ros/jazzy/share
+== water_full (world:=water tank:=full)
+   wall time 40 s for 30 s of sim
+[ERROR] [gazebo-1]: process has died [pid 591, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf --force-version 8'].
+30.0000,-0.4922825775250991,-0.012452621547467246,0.2479451821150077,0.07639832129267125,-0.12127202584045828,0.044688347521386396,0.0001880991622118396,-0.03326030378566162,-0.1911248109382633
+== water_full_damped (world:=water tank:=full water_damping:=true)
+   wall time 38 s for 30 s of sim
+[ERROR] [gazebo-1]: process has died [pid 751, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf --force-version 8'].
+30.0000,-0.044286149817460055,-0.0001780451610271991,0.24476842085858225,-0.055983748901266624,-0.07753290438097693,0.006428823743399605,0.003600509506543943,0.0004154823167985313,-0.006399488364185216
+== water_empty_damped (world:=water tank:=empty water_damping:=true)
+   wall time 38 s for 30 s of sim
+[ERROR] [gazebo-1]: process has died [pid 911, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf --force-version 8'].
+30.0000,-0.005500180161923408,0.00031273492834497354,0.26851788767999313,-0.07934531047256205,-0.09834519005382328,0.012443771030595721,0.0035734635181825986,-0.00035272511661386247,-0.013489237615615286
+== ground_full (world:=ground tank:=full)
+   wall time 21 s for 15 s of sim
+[ERROR] [gazebo-1]: process has died [pid 1071, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/ground.sdf --force-version 8'].
+15.0000,-1.9847548165101376e-09,3.283651026374635e-13,0.30653938596955227,-1.071235676041767e-12,-6.4753311355291326e-09,-2.540287673748394e-20,0.0,0.0,0.0
+== water_actuate (world:=water tank:=full water_damping:=true)
+   wall time 27 s for 20 s of sim
+[ERROR] [gazebo-1]: process has died [pid 1228, exit code -15, cmd 'ruby /opt/ros/jazzy/opt/gz_tools_vendor/bin/gz sim -r -s -v 3 /home/test/cl415_ws/install/cl415_description/share/cl415_description/worlds/water.sdf --force-version 8'].
+20.0000,11.494096046478472,10.307068328629688,0.24523929112299817,-0.0561925564504104,-0.07907822273965456,0.04988508772446494,-0.02536136888040247,-0.0007885714348982361,0.004985614084995699
+== sdf_only (models/cl415_full in worlds/water_cl415.sdf, gz only)
+  position {
+    x: -0.28067163045831905
+    y: 0.001314304106634241
+    z: 0.24450165217816716
+sim_time {
+  sec: 21
+  nsec: 721000000
+--
+real_time_factor: 0.95687644906977254
+step_size {
+all runs done

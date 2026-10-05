@@ -1,0 +1,54 @@
+{
+ "log": "2026-10-03_21_53_10",
+ "duration_s": 218.224,
+ "takeoff": {
+  "t_arm": 21.068,
+  "t_liftoff": 25.44,
+  "ground_roll_m": 35.905525235117715,
+  "liftoff_airspeed": 19.03687400817872,
+  "ground_roll_time_s": 4.372
+ },
+ "cruise": {
+  "samples": 787,
+  "throttle": 0.5499290227890015,
+  "throttle_predicted": 0.5562558155506445,
+  "elevator_deg_TE_down": -0.7838919758796692,
+  "pitch_deg": 0.6649960643856685,
+  "airspeed": 19.899223022460937
+ },
+ "tracking": {
+  "alt_err_rms_m": 3.43966215315429,
+  "alt_err_ref_rms_m": 1.73097914661845,
+  "airspeed_err_rms": 0.6175556778907776
+ },
+ "touchdown": {
+  "t": 200.172,
+  "vz_mps": 0.6350879669189453,
+  "rollout_m": 144.67673777384462,
+  "from_liftoff_s": 174.732,
+  "x_north": -0.08465231209993362,
+  "y_east": 100.19019317626953,
+  "airspeed": 16.304135131835935,
+  "pitch_deg": 1.2505457741463326
+ },
+ "ekf_attitude_error_deg": {
+  "roll": {
+   "rms": 0.4365925818152148,
+   "max": 1.3934340607449205
+  },
+  "pitch": {
+   "rms": 0.7938485775217959,
+   "max": 1.5379686527120342
+  },
+  "yaw": {
+   "rms": 2.2490005010582155,
+   "max": 17.54061290894191
+  }
+ },
+ "max_roll_deg": 42.47188641273184,
+ "max_airspeed": 21.641271591186523,
+ "nav_states": [
+  "AUTO_LOITER",
+  "AUTO_MISSION"
+ ]
+}

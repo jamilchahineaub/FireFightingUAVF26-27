@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- water.sdf with the exported cl415_full model already in it, for gz-only use (no ROS):
+       GZ_SIM_RESOURCE_PATH=<project>/cl415_description/models:<project>  gz sim water_cl415.sdf
+     flat calm water at z = 0: graded buoyancy, water (1000 kg/m^3) below, air above.
+     the buoyancy system works on box / cylinder / sphere collisions, which is what the cl415 uses -->
+<sdf version="1.9">
+  <world name="water_cl415">
+    <physics name="1ms" type="dart">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <gravity>0 0 -9.81</gravity>
+    <wind>
+      <linear_velocity>0 0 0</linear_velocity>
+    </wind>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <graded_buoyancy>
+        <default_density>1000</default_density>
+        <density_change>
+          <above_depth>0</above_depth>
+          <density>1.225</density>
+        </density_change>
+      </graded_buoyancy>
+    </plugin>
+
+    <scene>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.7 0.8 0.95 1</background>
+    </scene>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 30 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.2 -0.9</direction>
+    </light>
+
+    <!-- visual only: the water itself is the buoyancy system -->
+    <model name="water_surface">
+      <static>true</static>
+      <pose>0 0 -0.002 0 0 0</pose>
+      <link name="link">
+        <visual name="surface">
+          <geometry>
+            <box><size>200 200 0.004</size></box>
+          </geometry>
+          <material>
+            <ambient>0.05 0.25 0.45 1</ambient>
+            <diffuse>0.05 0.3 0.55 1</diffuse>
+          </material>
+          <transparency>0.4</transparency>
+        </visual>
+      </link>
+    </model>
+    <include>
+      <uri>model://cl415_full</uri>
+      <name>cl415</name>
+      <pose>0 0 0.29 0 0 0</pose>
+    </include>
+  </world>
+</sdf>

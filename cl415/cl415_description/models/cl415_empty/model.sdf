@@ -1,0 +1,841 @@
+<sdf version='1.11'>
+  <model name='cl415'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.068087116655148605 1.636908136818258e-06 -0.070884917664132699 0 0 0</pose>
+        <mass>7.2349999999999994</mass>
+        <inertia>
+          <ixx>1.0791524590887149</ixx>
+          <ixy>-4.5985991690578068e-06</ixy>
+          <ixz>0.030999896566139631</ixz>
+          <iyy>0.75506622617853159</iyy>
+          <iyz>-1.705897080785718e-06</iyz>
+          <izz>1.6992575435973929</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__fuselage_c0_collision'>
+        <pose>0.53251000000000004 0 -0.18029100000000001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.12501999999999999 0.11189300000000001 0.14921499999999999</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__fuselage_c1_collision_1'>
+        <pose>0.38500000000000001 0 -0.151395 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.17000000000000001 0.19908899999999999 0.26514300000000002</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__fuselage_c2_collision_2'>
+        <pose>0.079963699999999999 0 -0.16194500000000001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.44007299999999999 0.21010100000000001 0.28918899999999997</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__fuselage_c3_collision_3'>
+        <pose>-0.29503600000000002 0 -0.142785 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.30992700000000001 0.197964 0.25087100000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__fuselage_c4_collision_4'>
+        <pose>-0.59999999999999998 0 -0.123921 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.29999999999999999 0.120182 0.21313799999999999</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__fuselage_c5_collision_5'>
+        <pose>-0.92124899999999998 0 -0.10417899999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.34249800000000002 0.038124199999999997 0.169682</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__h_stab_c0_collision_6'>
+        <pose>-0.88500000000000001 0 0.127 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.14399999999999999 0.93600000000000005 0.038240000000000003</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__left_float_c0_collision_7'>
+        <pose>-0.099890599999999996 1.1516999999999999 -0.14177899999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.25748799999999999 0.037082799999999999 0.080418199999999995</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__left_float_c1_collision_8'>
+        <pose>-0.10000000000000001 1.1516999999999999 -0.051569499999999997 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.080000000000000002 0.0089999999999999993 0.10000000000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__left_nacelle_c0_collision_9'>
+        <pose>-0.039742899999999998 0.29730099999999998 0.037859299999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.39480500000000002 0.078228300000000001 0.126691</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__left_wing_c0_collision_10'>
+        <pose>-0.139351 0.62749999999999995 0.0043729199999999998 0 -0.046251200000000027 0</pose>
+        <geometry>
+          <box>
+            <size>0.27800000000000002 1.2549999999999999 0.047260000000000003</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__right_float_c0_collision_11'>
+        <pose>-0.099890599999999996 -1.1516999999999999 -0.14177899999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.25748799999999999 0.037082799999999999 0.080418199999999995</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__right_float_c1_collision_12'>
+        <pose>-0.10000000000000001 -1.1516999999999999 -0.051569499999999997 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.080000000000000002 0.0089999999999999993 0.10000000000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__right_nacelle_c0_collision_13'>
+        <pose>-0.039742899999999998 -0.29729899999999998 0.037859299999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.39480500000000002 0.078228300000000001 0.126691</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__right_wing_c0_collision_14'>
+        <pose>-0.139351 -0.62749999999999995 0.0043729199999999998 0 -0.046251200000000027 0</pose>
+        <geometry>
+          <box>
+            <size>0.27800000000000002 1.2549999999999999 0.047260000000000003</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__v_stab_c0_collision_15'>
+        <pose>-0.86274300000000004 2.9923499999999999e-05 0.19685 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.35145500000000002 0.047060900000000003 0.40170600000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='base_link_fixed_joint_lump__fuselage_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/fuselage.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 0.125 1</diffuse>
+          <ambient>1 1 0.125 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__h_stab_visual_1'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/h_stab.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__left_float_visual_2'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/left_float.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.25 0.4375 0.9375 1</diffuse>
+          <ambient>0.25 0.4375 0.9375 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__left_nacelle_visual_3'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/left_nacelle.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.6875 0.712499976 0.775000036 1</diffuse>
+          <ambient>0.6875 0.712499976 0.775000036 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__left_wing_visual_4'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/left_wing.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__right_float_visual_5'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/right_float.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.25 0.4375 0.9375 1</diffuse>
+          <ambient>0.25 0.4375 0.9375 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__right_nacelle_visual_6'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/right_nacelle.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.6875 0.712499976 0.775000036 1</diffuse>
+          <ambient>0.6875 0.712499976 0.775000036 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__right_wing_visual_7'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/right_wing.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__v_stab_visual_8'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/v_stab.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 0.125 1</diffuse>
+          <ambient>1 1 0.125 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__water_tank_visual_9'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/water_tank.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.875 1 1 1</diffuse>
+          <ambient>0.875 1 1 1</ambient>
+        </material>
+      </visual>
+      <sensor name='imu' type='imu'>
+        <always_on>true</always_on>
+        <update_rate>200</update_rate>
+        <topic>/cl415/imu</topic>
+        <imu/>
+      </sensor>
+    </link>
+    <joint name='elevator_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.95699999999999996 0 0.127 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>elevator</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-0.436332</lower>
+          <upper>0.436332</upper>
+          <effort>2</effort>
+          <velocity>8.6999999999999993</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='elevator'>
+      <pose relative_to='elevator_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.025073100000000001 1.80306e-07 1.08467e-08 0 0 0</pose>
+        <mass>0.059999999999999998</mass>
+        <inertia>
+          <ixx>0.0049509999999999997</ixx>
+          <ixy>-2.74619e-11</ixy>
+          <ixz>6.4644800000000001e-11</ixz>
+          <iyy>4.2833200000000002e-05</iyy>
+          <iyz>1.9838599999999999e-10</iyz>
+          <izz>0.0049888900000000002</izz>
+        </inertia>
+      </inertial>
+      <collision name='elevator_c0_collision'>
+        <pose>-0.040276300000000001 -2.7755599999999997e-17 -1.3877799999999999e-17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.109447 0.93600000000000005 0.028952100000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='elevator_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/elevator.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0.25 0.187500015 1</diffuse>
+          <ambient>1 0.25 0.187500015 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_propeller_joint' type='revolute'>
+      <pose relative_to='base_link'>0.1895 0.29730000000000001 0.060600000000000001 3.1415926535897931 1.5707926536359933 3.1415926535897931</pose>
+      <parent>base_link</parent>
+      <child>left_propeller</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>200</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_propeller'>
+      <pose relative_to='left_propeller_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-9.9280700000000003e-07 2.05844e-07 0.0079392899999999999 0 0 0</pose>
+        <mass>0.050000000000000003</mass>
+        <inertia>
+          <ixx>6.4521699999999996e-05</ixx>
+          <ixy>-4.1732299999999997e-11</ixy>
+          <ixz>-7.4176499999999997e-10</ixz>
+          <iyy>6.4524599999999995e-05</iyy>
+          <iyz>1.94693e-10</iyz>
+          <izz>0.000111037</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_propeller_c0_collision'>
+        <pose>0 0 0.01745 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.058900000000000001</length>
+            <radius>0.029600000000000001</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='left_propeller_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/left_propeller.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.149999991 0.149999991 0.149999991 1</diffuse>
+          <ambient>0.149999991 0.149999991 0.149999991 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='left_aileron_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.208616 0.99399999999999999 -0.00231168 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>left_aileron</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-0.436332</lower>
+          <upper>0.436332</upper>
+          <effort>2</effort>
+          <velocity>8.6999999999999993</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_aileron'>
+      <pose relative_to='left_aileron_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0183503 -1.25899e-13 -0.0025524900000000001 0 0 0</pose>
+        <mass>0.035000000000000003</mass>
+        <inertia>
+          <ixx>0.00046329200000000002</ixx>
+          <ixy>0</ixy>
+          <ixz>-1.74855e-06</ixz>
+          <iyy>1.44088e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.00047513999999999998</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_aileron_c0_collision'>
+        <pose>-0.028365999999999999 -3.7025900000000001e-14 0.00013086799999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.081617599999999998 0.39800000000000002 0.024963699999999998</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='left_aileron_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/left_aileron.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0.25 0.187500015 1</diffuse>
+          <ambient>1 0.25 0.187500015 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_propeller_joint' type='revolute'>
+      <pose relative_to='base_link'>0.1895 -0.29730000000000001 0.060600000000000001 3.1415926535897931 1.5707926536359933 3.1415926535897931</pose>
+      <parent>base_link</parent>
+      <child>right_propeller</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>10</effort>
+          <velocity>200</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_propeller'>
+      <pose relative_to='right_propeller_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-2.1925999999999999e-07 -2.9518399999999998e-07 0.0079393599999999995 0 0 0</pose>
+        <mass>0.050000000000000003</mass>
+        <inertia>
+          <ixx>6.4521800000000003e-05</ixx>
+          <ixy>1.3965499999999999e-09</ixy>
+          <ixz>-2.5966100000000002e-10</ixz>
+          <iyy>6.4533800000000002e-05</iyy>
+          <iyz>-1.6273500000000001e-10</iyz>
+          <izz>0.00011104599999999999</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_propeller_c0_collision'>
+        <pose>0 0 0.01745 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.058900000000000001</length>
+            <radius>0.029600000000000001</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='right_propeller_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/right_propeller.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.149999991 0.149999991 0.149999991 1</diffuse>
+          <ambient>0.149999991 0.149999991 0.149999991 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_aileron_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.208616 -0.99399999999999999 -0.00231168 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>right_aileron</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+        <limit>
+          <lower>-0.436332</lower>
+          <upper>0.436332</upper>
+          <effort>2</effort>
+          <velocity>8.6999999999999993</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_aileron'>
+      <pose relative_to='right_aileron_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.0183503 -1.11577e-13 -0.0025524900000000001 0 0 0</pose>
+        <mass>0.035000000000000003</mass>
+        <inertia>
+          <ixx>0.00046329200000000002</ixx>
+          <ixy>0</ixy>
+          <ixz>-1.74855e-06</ixz>
+          <iyy>1.44088e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.00047513999999999998</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_aileron_c0_collision'>
+        <pose>-0.028365999999999999 -5.5511199999999995e-17 0.00013086799999999999 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.081617599999999998 0.39800000000000002 0.024963699999999998</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='right_aileron_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/right_aileron.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0.25 0.187500015 1</diffuse>
+          <ambient>1 0.25 0.187500015 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='rudder_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.95599999999999996 0 -0.017299999999999999 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>rudder</child>
+      <axis>
+        <xyz>0.23288200000000001 0 -0.97250499999999995</xyz>
+        <limit>
+          <lower>-0.52359900000000004</lower>
+          <upper>0.52359900000000004</upper>
+          <effort>2</effort>
+          <velocity>8.6999999999999993</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rudder'>
+      <pose relative_to='rudder_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.080166600000000005 1.2362500000000001e-08 0.176709 0 0 0</pose>
+        <mass>0.035000000000000003</mass>
+        <inertia>
+          <ixx>0.00047898199999999998</ixx>
+          <ixy>-2.5839099999999998e-10</ixy>
+          <ixz>9.1311999999999996e-05</ixz>
+          <iyy>0.000520003</iyy>
+          <iyz>-7.29896e-11</iyz>
+          <izz>4.3085399999999999e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='rudder_c0_collision'>
+        <pose>-0.088195800000000005 -1.73472e-18 0.21965000000000001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.17399700000000001 0.031550700000000001 0.42930000000000001</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='rudder_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://cl415_description/meshes/rudder.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 0.25 0.187500015 1</diffuse>
+          <ambient>1 0.25 0.187500015 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <plugin name='gz::sim::systems::LiftDrag' filename='gz-sim-lift-drag-system'>
+      <link_name>base_link</link_name>
+      <air_density>1.225</air_density>
+      <area>0.349018</area>
+      <cp>-0.0694257 0.6275 -0.00321331</cp>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <a0>0.118761</a0>
+      <cla>4.84994</cla>
+      <cda>0.427176</cda>
+      <cma>0</cma>
+      <alpha_stall>0.276698</alpha_stall>
+      <cla_stall>-1.85638</cla_stall>
+      <cda_stall>1.73344</cda_stall>
+      <cma_stall>0</cma_stall>
+      <control_joint_name>left_aileron_joint</control_joint_name>
+      <control_joint_rad_to_cl>1.49813</control_joint_rad_to_cl>
+      <cm_delta>-0.0520359</cm_delta>
+    </plugin>
+    <plugin name='gz::sim::systems::LiftDrag' filename='gz-sim-lift-drag-system'>
+      <link_name>base_link</link_name>
+      <air_density>1.225</air_density>
+      <area>0.349018</area>
+      <cp>-0.0694257 -0.6275 -0.00321331</cp>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <a0>0.118761</a0>
+      <cla>4.84994</cla>
+      <cda>0.427176</cda>
+      <cma>0</cma>
+      <alpha_stall>0.276698</alpha_stall>
+      <cla_stall>-1.85638</cla_stall>
+      <cda_stall>1.73344</cda_stall>
+      <cma_stall>0</cma_stall>
+      <control_joint_name>right_aileron_joint</control_joint_name>
+      <control_joint_rad_to_cl>1.49813</control_joint_rad_to_cl>
+      <cm_delta>-0.0520359</cm_delta>
+    </plugin>
+    <plugin name='gz::sim::systems::LiftDrag' filename='gz-sim-lift-drag-system'>
+      <link_name>base_link</link_name>
+      <air_density>1.225</air_density>
+      <area>0.223704</area>
+      <cp>-0.87275 0 0.127</cp>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <a0>-0.0617526</a0>
+      <cla>2.2158</cla>
+      <cda>0.215845</cda>
+      <cma>0</cma>
+      <alpha_stall>0.478461</alpha_stall>
+      <cla_stall>-1.1079</cla_stall>
+      <cda_stall>1</cda_stall>
+      <cma_stall>0</cma_stall>
+      <control_joint_name>elevator_joint</control_joint_name>
+      <control_joint_rad_to_cl>2.14528</control_joint_rad_to_cl>
+      <cm_delta>-0.0974998</cm_delta>
+    </plugin>
+    <plugin name='gz::sim::systems::LiftDrag' filename='gz-sim-lift-drag-system'>
+      <link_name>base_link</link_name>
+      <air_density>1.225</air_density>
+      <area>0.174408</area>
+      <cp>-0.879768 0 0.155968</cp>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <a0>0</a0>
+      <cla>2.4169</cla>
+      <cda>0.208619</cda>
+      <cma>0</cma>
+      <alpha_stall>0.401426</alpha_stall>
+      <cla_stall>-1.20845</cla_stall>
+      <cda_stall>1</cda_stall>
+      <cma_stall>0</cma_stall>
+      <control_joint_name>rudder_joint</control_joint_name>
+      <control_joint_rad_to_cl>-1.2843</control_joint_rad_to_cl>
+      <cm_delta>0.109399</cm_delta>
+    </plugin>
+    <plugin name='gz::sim::systems::MulticopterMotorModel' filename='gz-sim-multicopter-motor-model-system'>
+      <robotNamespace>cl415</robotNamespace>
+      <jointName>left_propeller_joint</jointName>
+      <linkName>left_propeller</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>890.118</maxRotVelocity>
+      <motorConstant>4.2079e-05</motorConstant>
+      <momentConstant>0.0299455</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0.0001</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin name='gz::sim::systems::MulticopterMotorModel' filename='gz-sim-multicopter-motor-model-system'>
+      <robotNamespace>cl415</robotNamespace>
+      <jointName>right_propeller_joint</jointName>
+      <linkName>right_propeller</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>890.118</maxRotVelocity>
+      <motorConstant>4.2079e-05</motorConstant>
+      <momentConstant>0.0299455</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0.0001</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>left_aileron_joint</joint_name>
+      <topic>/cl415/cmd/left_aileron</topic>
+      <p_gain>0.1691</p_gain>
+      <i_gain>0.5411</i_gain>
+      <d_gain>0.004228</d_gain>
+      <i_max>0.15</i_max>
+      <i_min>-0.15</i_min>
+      <cmd_max>0.5</cmd_max>
+      <cmd_min>-0.5</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>right_aileron_joint</joint_name>
+      <topic>/cl415/cmd/right_aileron</topic>
+      <p_gain>0.1691</p_gain>
+      <i_gain>0.5411</i_gain>
+      <d_gain>0.004228</d_gain>
+      <i_max>0.15</i_max>
+      <i_min>-0.15</i_min>
+      <cmd_max>0.5</cmd_max>
+      <cmd_min>-0.5</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>elevator_joint</joint_name>
+      <topic>/cl415/cmd/elevator</topic>
+      <p_gain>0.5155</p_gain>
+      <i_gain>1.65</i_gain>
+      <d_gain>0.01289</d_gain>
+      <i_max>0.15</i_max>
+      <i_min>-0.15</i_min>
+      <cmd_max>0.5</cmd_max>
+      <cmd_min>-0.5</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointPositionController' filename='gz-sim-joint-position-controller-system'>
+      <joint_name>rudder_joint</joint_name>
+      <topic>/cl415/cmd/rudder</topic>
+      <p_gain>0.4659</p_gain>
+      <i_gain>1.491</i_gain>
+      <d_gain>0.01165</d_gain>
+      <i_max>0.15</i_max>
+      <i_min>-0.15</i_min>
+      <cmd_max>0.5</cmd_max>
+      <cmd_min>-0.5</cmd_min>
+    </plugin>
+    <plugin name='gz::sim::systems::JointStatePublisher' filename='gz-sim-joint-state-publisher-system'>
+      <topic>/cl415/joint_states</topic>
+    </plugin>
+    <plugin name='gz::sim::systems::OdometryPublisher' filename='gz-sim-odometry-publisher-system'>
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <odom_topic>/cl415/odometry</odom_topic>
+      <tf_topic>/cl415/tf</tf_topic>
+    </plugin>
+    <frame name='fuselage_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='fuselage' attached_to='fuselage_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='h_stab_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='h_stab' attached_to='h_stab_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_float_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_float' attached_to='left_float_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_nacelle_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_nacelle' attached_to='left_nacelle_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_wing_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='left_wing' attached_to='left_wing_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_float_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_float' attached_to='right_float_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_nacelle_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_nacelle' attached_to='right_nacelle_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_wing_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='right_wing' attached_to='right_wing_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='v_stab_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='v_stab' attached_to='v_stab_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='water_tank_joint' attached_to='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='water_tank' attached_to='water_tank_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+  </model>
+</sdf>

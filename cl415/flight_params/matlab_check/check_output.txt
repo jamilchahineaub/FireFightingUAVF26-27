@@ -1,0 +1,73 @@
+cl415 params sha c37151fbc24d, CL_max 1.236, linear stall alpha 7.43 deg, blend centre 11.29 deg
+
+==== CL  loaded  V = 20.0 m/s  gamma = 0.0 deg ====
+trim: alpha 0.99 deg, de 0.05 deg, dT 0.524, T 7.93 N, CL 0.607, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -6.081+8.580i              10.516    0.578     0.16        0.1     3.171  Level 1
+phugoid          -0.076+0.689i               0.693    0.110    13.07        9.1     0.209  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN  6644.13     4605.4     0.000  n/a
+dutch roll       -1.064+4.178i               4.311    0.247     0.94        0.7     1.300  Level 1
+roll subsidence  -12.055+0.000i             12.055      NaN     0.08        0.1     3.635  Level 1
+spiral           0.071+0.000i                0.071      NaN   -14.08        9.8     0.021  NOT L1: t2<20s
+  lon/lat coupling = 0.0e+00   step check = 1.0e-10
+
+==== AL  loaded  V = 18.1 m/s  gamma = -4.0 deg ====
+trim: alpha 2.40 deg, de -0.27 deg, dT 0.348, T 0.26 N, CL 0.741, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -5.491+7.758i               9.504    0.578     0.18        0.1     2.866  Level 1
+phugoid          -0.073+0.693i               0.697    0.104    13.77        9.5     0.210  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN  7077.53     4905.8     0.000  n/a
+dutch roll       -0.973+3.796i               3.918    0.248     1.03        0.7     1.181  Level 1
+roll subsidence  -10.881+0.000i             10.881      NaN     0.09        0.1     3.281  Level 1
+spiral           0.056+0.000i                0.056      NaN   -17.95       12.4     0.017  Level 1
+  lon/lat coupling = 0.0e+00   step check = 1.2e-10
+
+==== SL  loaded  V = 15.3 m/s  gamma = 0.0 deg ====
+trim: alpha 5.98 deg, de -4.03 deg, dT 0.448, T 7.37 N, CL 1.031, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -4.501+6.529i               7.930    0.568     0.22        0.2     2.391  Level 1
+phugoid          -0.068+0.875i               0.877    0.077    14.79       10.3     0.264  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN 11564.76     8016.1     0.000  n/a
+dutch roll       -0.900+3.248i               3.370    0.267     1.11        0.8     1.016  Level 1
+roll subsidence  -9.133+0.000i               9.133      NaN     0.11        0.1     2.754  Level 1
+spiral           0.139+0.000i                0.139      NaN    -7.21        5.0     0.042  NOT L1: t2<12s
+  lon/lat coupling = 0.0e+00   step check = 3.2e-10
+
+==== CU  unloaded  V = 20.0 m/s  gamma = 0.0 deg ====
+trim: alpha -1.00 deg, de 1.74 deg, dT 0.508, T 6.83 N, CL 0.435, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -7.188+8.798i              11.361    0.633     0.14        0.1     3.426  Level 1
+phugoid          -0.100+0.653i               0.661    0.152     9.99        6.9     0.199  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN  5141.44     3563.8     0.000  n/a
+dutch roll       -1.106+4.203i               4.346    0.255     0.90        0.6     1.310  Level 1
+roll subsidence  -12.532+0.000i             12.532      NaN     0.08        0.1     3.778  Level 1
+spiral           0.055+0.000i                0.055      NaN   -18.28       12.7     0.016  NOT L1: t2<20s
+  lon/lat coupling = 1.2e-07   step check = 1.4e-10
+
+==== AU  unloaded  V = 15.3 m/s  gamma = -4.0 deg ====
+trim: alpha 2.39 deg, de -0.26 deg, dT 0.294, T 0.19 N, CL 0.740, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -5.493+6.726i               8.684    0.633     0.18        0.1     2.618  Level 1
+phugoid          -0.079+0.769i               0.773    0.102    12.67        8.8     0.233  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN  8133.32     5637.6     0.000  n/a
+dutch roll       -0.881+3.266i               3.383    0.261     1.13        0.8     1.020  Level 1
+roll subsidence  -9.538+0.000i               9.538      NaN     0.10        0.1     2.876  Level 1
+spiral           0.063+0.000i                0.063      NaN   -15.76       10.9     0.019  NOT L1: t2<12s
+  lon/lat coupling = 8.9e-08   step check = 1.7e-10
+
+==== SU  unloaded  V = 13.0 m/s  gamma = 0.0 deg ====
+trim: alpha 5.80 deg, de -3.63 deg, dT 0.380, T 5.25 N, CL 1.021, exitflag 1
+
+mode             lambda                         wn     zeta   tau[s] t2/t1/2[s] wn/sqrt11  MIL-F-8785C L1
+short period     -4.536+5.707i               7.290    0.622     0.22        0.2     2.198  Level 1
+phugoid          -0.069+0.955i               0.958    0.072    14.44       10.0     0.289  Level 1
+altitude (integr.) -0.000+0.000i               0.000      NaN 13312.55     9227.6     0.000  n/a
+dutch roll       -0.820+2.824i               2.941    0.279     1.22        0.8     0.887  Level 1
+roll subsidence  -8.061+0.000i               8.061      NaN     0.12        0.1     2.430  Level 1
+spiral           0.153+0.000i                0.153      NaN    -6.52        4.5     0.046  NOT L1: t2<12s
+  lon/lat coupling = 1.9e-07   step check = 3.8e-10

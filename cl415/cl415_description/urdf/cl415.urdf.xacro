@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!-- scaled CL-415 water bomber UAV: 2.51 m span, NACA 4417 wing, 10.5 kg with 3 L of water.
+     frame REP-103: x forward, y left, z up, origin at the wing leading edge root (centreline).
+     args:
+       tank:=full|empty        water mass in or out (full 10.5 kg, empty 7.5 kg)
+       water_damping:=false    adds a Hydrodynamics damper for float tests only (it also acts in air)
+     numbers (inertia, collision boxes, joints, aero, motors) live in cl415_generated.xacro,
+     written by tools/export_description.py from the SolidWorks mass properties and the aero script -->
+<robot name="cl415" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="tank" default="full"/>
+  <xacro:arg name="water_damping" default="false"/>
+
+  <xacro:include filename="cl415_generated.xacro"/>
+  <xacro:include filename="cl415.gazebo.xacro"/>
+
+  <xacro:property name="mesh_dir" value="package://cl415_description/meshes"/>
+
+  <material name="cl415_yellow"><color rgba="0.95 0.80 0.10 1"/></material>
+  <material name="cl415_white"><color rgba="0.92 0.92 0.92 1"/></material>
+  <material name="cl415_red"><color rgba="0.85 0.20 0.15 1"/></material>
+  <material name="cl415_grey"><color rgba="0.55 0.57 0.62 1"/></material>
+  <material name="cl415_black"><color rgba="0.12 0.12 0.12 1"/></material>
+  <material name="cl415_blue"><color rgba="0.20 0.35 0.75 1"/></material>
+  <material name="cl415_tank"><color rgba="0.70 0.85 0.95 1"/></material>
+
+  <!-- root without inertia (keeps KDL quiet); every fixed part hangs off it and gets lumped into it in SDF -->
+  <link name="base_link"/>
+
+  <!-- fixed part: mesh in the base frame, inertia and collision from the generated file -->
+  <xacro:macro name="fixed_part" params="name material">
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><mesh filename="${mesh_dir}/${name}.stl"/></geometry>
+        <material name="${material}"/>
+      </visual>
+      <xacro:call macro="collision_${name}"/>
+      <xacro:call macro="inertial_${name}"/>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${name}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- control surface on its hinge line -->
+  <xacro:macro name="surface" params="name parent xyz axis limit material">
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><mesh filename="${mesh_dir}/${name}.stl"/></geometry>
+        <material name="${material}"/>
+      </visual>
+      <xacro:call macro="collision_${name}"/>
+      <xacro:call macro="inertial_${name}"/>
+    </link>
+    <joint name="${name}_joint" type="revolute">
+      <parent link="${parent}"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <axis xyz="${axis}"/>
+      <limit lower="${-limit}" upper="${limit}" effort="2.0" velocity="8.7"/>
+      <dynamics damping="0.001" friction="0.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- propeller: link z points forward (thrust axis) -->
+  <xacro:macro name="propeller" params="side xyz rpy">
+    <link name="${side}_propeller">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><mesh filename="${mesh_dir}/${side}_propeller.stl"/></geometry>
+        <material name="cl415_black"/>
+      </visual>
+      <xacro:call macro="collision_${side}_propeller"/>
+      <xacro:call macro="inertial_${side}_propeller"/>
+    </link>
+    <joint name="${side}_propeller_joint" type="continuous">
+      <parent link="${side}_nacelle"/>
+      <child link="${side}_propeller"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="10.0" velocity="200.0"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:fixed_part name="fuselage" material="cl415_yellow"/>
+  <xacro:fixed_part name="left_wing" material="cl415_white"/>
+  <xacro:fixed_part name="right_wing" material="cl415_white"/>
+  <xacro:fixed_part name="h_stab" material="cl415_white"/>
+  <xacro:fixed_part name="v_stab" material="cl415_yellow"/>
+  <xacro:fixed_part name="left_nacelle" material="cl415_grey"/>
+  <xacro:fixed_part name="right_nacelle" material="cl415_grey"/>
+  <xacro:fixed_part name="left_float" material="cl415_blue"/>
+  <xacro:fixed_part name="right_float" material="cl415_blue"/>
+
+  <!-- water tank: inside the hull, so no collision (it would count twice for buoyancy) -->
+  <link name="water_tank">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="${mesh_dir}/water_tank.stl"/></geometry>
+      <material name="cl415_tank"/>
+    </visual>
+    <xacro:inertial_water_tank tank="$(arg tank)"/>
+  </link>
+  <joint name="water_tank_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="water_tank"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:surface name="left_aileron" parent="${left_aileron_parent}" xyz="${left_aileron_xyz}"
+                 axis="${left_aileron_axis}" limit="${left_aileron_limit}" material="cl415_red"/>
+  <xacro:surface name="right_aileron" parent="${right_aileron_parent}" xyz="${right_aileron_xyz}"
+                 axis="${right_aileron_axis}" limit="${right_aileron_limit}" material="cl415_red"/>
+  <xacro:surface name="elevator" parent="${elevator_parent}" xyz="${elevator_xyz}"
+                 axis="${elevator_axis}" limit="${elevator_limit}" material="cl415_red"/>
+  <xacro:surface name="rudder" parent="${rudder_parent}" xyz="${rudder_xyz}"
+                 axis="${rudder_axis}" limit="${rudder_limit}" material="cl415_red"/>
+
+  <xacro:propeller side="left" xyz="${left_propeller_xyz}" rpy="${left_propeller_rpy}"/>
+  <xacro:propeller side="right" xyz="${right_propeller_xyz}" rpy="${right_propeller_rpy}"/>
+
+</robot>

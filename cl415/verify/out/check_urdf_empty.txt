@@ -1,0 +1,7 @@
+robot name is: cl415
+---------- Successfully Parsed XML ---------------
+root Link: base_link has 10 child(ren)
+    child(1):  fuselage
+    child(2):  h_stab
+        child(1):  elevator
+    child(3):  left_float
