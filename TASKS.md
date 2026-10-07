@@ -34,7 +34,7 @@ Next, after the above:
 ## Michael: Gazebo / PX4 environment
 
 - [ ] Ubuntu 24.04 (or 22.04), PX4-Autopilot v1.17 cloned recursively, `Tools/setup/ubuntu.sh`, `make px4_sitl`
-- [ ] Gazebo Harmonic only; `gz sim --versions` shows no Ionic/Jetty
+- [x] Gazebo Harmonic only; `gz sim --versions` shows no Ionic/Jetty
 - [ ] Fill in `docs/versions.md` (OS, PX4 tag, models submodule commit)
 - [ ] QGroundControl, PlotJuggler, `pip install pyulog mavsdk pymavlink jinja2 pyyaml`
 - [ ] Smoke tests S1-S8 in `docs/pretest_checklist.md`, in order
