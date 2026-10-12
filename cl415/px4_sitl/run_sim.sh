@@ -7,16 +7,17 @@
 # ground station: Mission Planner on windows, connection type UDPCl, host = the wsl ip printed below, port 18570
 # stop with px4_sitl/stop_sim.sh
 set -e
-HERE=/mnt/c/Users/jamil/Desktop/jim/uni/CL415-VIP/FireFightingUAVF26-27/cl415/px4_sitl
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PX4_DIR=${PX4_DIR:-$HOME/PX4-Autopilot}
 VARIANT=${VARIANT:-runway}
 if [ "$VARIANT" = "water" ]; then WORLD=cl415_water; AUTOSTART=4051; else WORLD=cl415_runway; AUTOSTART=4050; fi
 LOGS=$HOME/cl415_sim_logs
 mkdir -p "$LOGS"
 source /opt/ros/jazzy/setup.bash
+source "$HOME/vrx_ws/install/setup.bash"
 
-export GZ_SIM_RESOURCE_PATH="$HERE/models:$HOME/cl415_ws/install/cl415_description/share:$GZ_SIM_RESOURCE_PATH"
-export GZ_SIM_SYSTEM_PLUGIN_PATH="$HOME/cl415_gz_plugins:$GZ_SIM_SYSTEM_PLUGIN_PATH"
+export GZ_SIM_RESOURCE_PATH="$HERE/models:$HOME/cl415_ws/install/cl415_description/share:$HOME/vrx_ws/install/share/vrx_gz/models:$GZ_SIM_RESOURCE_PATH"
+export GZ_SIM_SYSTEM_PLUGIN_PATH="$HOME/cl415_gz_plugins:$HOME/vrx_ws/install/lib:$GZ_SIM_SYSTEM_PLUGIN_PATH"
 export GZ_IP=127.0.0.1                     # keep gz-transport on loopback inside wsl
 # camera sensors (chase cam, tail cam) render in the server: hardware gl through wslg's d3d12 path
 export DISPLAY=${DISPLAY:-:0} GALLIUM_DRIVER=d3d12 MESA_D3D12_DEFAULT_ADAPTER_NAME=${MESA_D3D12_DEFAULT_ADAPTER_NAME:-NVIDIA}

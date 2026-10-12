@@ -58,8 +58,33 @@ def load_hull(path):
     # several recorders may have written the same stream: sort by time and drop duplicates
     a = a[np.argsort(a[:, 0], kind='stable')]
     a = a[np.r_[True, np.diff(a[:, 0]) > 1e-6]]
-    return {'t': a[:, 0], 'vol': a[:, 1], 'buoy': a[:, 2], 'resist': a[:, 3], 'plate_z': a[:, 4], 'heave': a[:, 5],
-            'keel': a[:, 6], 'speed': a[:, 7], 'awp': a[:, 8], 'vz': a[:, 9]}
+        # per-element data starts after the 10 global hull values
+    elem_data = a[:, 10:]
+
+    if elem_data.shape[1] % 4 != 0:
+        raise ValueError(
+            f"unexpected hull-state format: {elem_data.shape[1]} per-element values"
+        )
+
+    n_elem = elem_data.shape[1] // 4
+    elem = elem_data.reshape(a.shape[0], n_elem, 4)
+
+    return {
+        't': a[:, 0],
+        'vol': a[:, 1],
+        'buoy': a[:, 2],
+        'resist': a[:, 3],
+        'plate_z': a[:, 4],
+        'heave': a[:, 5],
+        'keel': a[:, 6],
+        'speed': a[:, 7],
+        'awp': a[:, 8],
+        'vz': a[:, 9],
+        'elem_vol': elem[:, :, 0],
+        'elem_plate_z': elem[:, :, 1],
+        'elem_drag': elem[:, :, 2],
+        'elem_lwet': elem[:, :, 3],
+    }
 
 
 def main():
@@ -294,6 +319,25 @@ def main():
         a.legend(fontsize=8)
         a.grid(True, lw=0.3)
         a.set_title('draft')
+
+        # wetted length of the six main hull elements
+        b = a.twinx()
+        hull_names = ['c0', 'c1', 'c2', 'c3', 'c4', 'c5']
+
+        for i, name_hull in enumerate(hull_names):
+            b.plot(
+                hull['t_px4'],
+                hull['elem_lwet'][:, i],
+                lw=0.8,
+                label=f'{name_hull} Lwet'
+            )
+
+        b.set_ylabel('wetted length [m]')
+        b.legend(fontsize=7, loc='upper right', ncol=2)
+
+        for a in ax[3, :]:
+            a.set_xlim(ax[1, 0].get_xlim())
+
         for a in ax[3, :]:
             a.set_xlim(ax[1, 0].get_xlim())
     for a in ax[1:, :].ravel().tolist() + [ax[0, 1]]:
