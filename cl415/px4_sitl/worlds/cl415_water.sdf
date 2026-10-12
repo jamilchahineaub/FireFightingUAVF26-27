@@ -51,15 +51,6 @@
           <pose>0 0 -30 0 0 0</pose>
           <geometry><plane><normal>0 0 1</normal><size>6000 6000</size></plane></geometry>
         </collision>
-        <visual name="surface">
-          <pose>0 0 -0.003 0 0 0</pose>
-          <geometry><plane><normal>0 0 1</normal><size>6000 6000</size></plane></geometry>
-          <material>
-            <ambient>0.05 0.25 0.4 0.85</ambient>
-            <diffuse>0.08 0.35 0.55 0.85</diffuse>
-            <specular>0.6 0.6 0.6 1</specular>
-          </material>
-        </visual>
         <visual name="shore">
           <pose>0 -1500 0.3 0 0 0</pose>
           <geometry><box><size>6000 1000 0.6</size></box></geometry>
@@ -67,6 +58,14 @@
         </visual>
       </link>
     </model>
+
+    <!-- VRX moving wave surface -->
+    <include>
+      <uri>model://coast_waves</uri>
+      <name>coast_waves</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
     <model name="chase_cam">
       <pose>-8 -3.5 2.5 0 0 0</pose>
       <link name="link">
@@ -102,5 +101,42 @@
       <name>cl415</name>
       <pose>0 0 0.250 0 0 0</pose>
     </include>
+
+    <!-- VRX wave field parameters -->
+    <plugin filename="libPublisherPlugin.so" name="vrx::PublisherPlugin">
+      <message type="gz.msgs.Param"
+               topic="/vrx/wavefield/parameters"
+               every="2.0">
+        params {
+          key: "direction"
+          value {
+            type: DOUBLE
+            double_value: 0.0
+          }
+        }
+        params {
+          key: "gain"
+          value {
+            type: DOUBLE
+            double_value: 0.3
+          }
+        }
+        params {
+          key: "period"
+          value {
+            type: DOUBLE
+            double_value: 5
+          }
+        }
+        params {
+          key: "steepness"
+          value {
+            type: DOUBLE
+            double_value: 0
+          }
+        }
+      </message>
+    </plugin>
+
   </world>
 </sdf>

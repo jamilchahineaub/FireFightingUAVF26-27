@@ -1,5 +1,8 @@
+
+
 // flying boat hull: hydrostatics and hydrodynamics for a hull made of boxes, on a model that leaves the water.
 //
+
 // why not gz's own usv plugins: Buoyancy's box clipping (gz-math Box::VolumeBelow) is wrong whenever the water
 // plane misses the box centre in the installed gz-math 7.5.2 (0.0103 vs the exact 0.0088 m^3 for a 0.44x0.21x0.29
 // box 5 cm off centre), and Hydrodynamics assumes a fully submerged body, so it keeps dragging the aircraft after
@@ -56,6 +59,7 @@
 #include <chrono>
 #include <cmath>
 #include <map>
+#include <mutex>
 #include <string>
 #include <vector>
 
@@ -69,6 +73,7 @@
 #include <gz/sim/components/Inertial.hh>
 #include <gz/transport/Node.hh>
 #include <sdf/Element.hh>
+#include "Wavefield.hh"
 
 namespace cl415
 {
@@ -221,9 +226,39 @@ public:
       return;
     }
     this->pub = this->node.Advertise<gz::msgs::Double_V>(this->topic);
+
+  this->node.Subscribe(
+      "/vrx/wavefield/parameters",
+      &FlyingBoatHull::OnWavefield,
+      this);
     this->ok = true;
     gzmsg << "[FlyingBoatHull] " << this->elements.size() << " boxes on " << this->linkName << ", state on "
           << this->topic << "\n";
+  }
+
+  void OnWavefield(const gz::msgs::Param &_msg)
+  {
+    std::lock_guard<std::mutex> lock(this->waveMutex);
+
+    this->wavefield.Load(_msg);
+    this->waveReceived = true;
+
+    gzmsg << "[FlyingBoatHull] VRX wave received, components = "
+          << this->wavefield.Number();
+
+    const auto &amps = this->wavefield.Amplitude_V();
+    const auto &ks   = this->wavefield.Wavenumber_V();
+    const auto &oms  = this->wavefield.AngularFrequency_V();
+
+    for (std::size_t i = 0; i < amps.size(); ++i)
+    {
+      gzmsg << " | i=" << i
+            << " a=" << amps[i]
+            << " k=" << ks[i]
+            << " omega=" << oms[i];
+    }
+
+    gzmsg << "\n";
   }
 
   void PreUpdate(const gz::sim::UpdateInfo &_info, gz::sim::EntityComponentManager &_ecm) override
@@ -261,7 +296,27 @@ public:
       V3 corner[8];
       el.keel = 1e9;
       el.plateZ = el.drag = 0.0;
-      el.level = this->level - el.wakeDepth * wake;
+      const V3 elementCenter =
+          pose.CoordPositionAdd(el.pose.Pos());
+
+      double waveHeight = 0.0;
+
+      {
+        std::lock_guard<std::mutex> lock(this->waveMutex);
+
+        if (this->waveReceived)
+        {
+          const double simTime =
+              std::chrono::duration<double>(_info.simTime).count();
+
+          waveHeight =
+              this->wavefield.ComputeDepthSimply(elementCenter, simTime);
+        }
+      }
+
+      el.level =
+          this->level + waveHeight - el.wakeDepth * wake;
+
       const double lvl = el.level;
       bool any = false;
       for (int i = 0; i < 8; i++)
@@ -269,7 +324,7 @@ public:
         const V3 c((i & 1) ? el.size.X() / 2 : -el.size.X() / 2, (i & 2) ? el.size.Y() / 2 : -el.size.Y() / 2,
                    (i & 4) ? el.size.Z() / 2 : -el.size.Z() / 2);
         corner[i] = pose.CoordPositionAdd(el.pose.CoordPositionAdd(c));
-        el.keel = std::min(el.keel, corner[i].Z() - this->level);
+        el.keel = std::min(el.keel, corner[i].Z() - lvl);
         any = any || corner[i].Z() < lvl;
       }
       keelMin = std::min(keelMin, el.keel);
@@ -399,11 +454,21 @@ public:
           vhf.Z(0.0);
           const V3 dragDir = vhf.Length() > 1e-6 ? -vhf / vhf.Length() : V3::Zero;
           if (vt.Length() > 1e-6)
-          {
-            const V3 ff = vt * (-0.5 * this->rho * this->cf * area * vt.Length());
-            apply(ff, cf);
-            fHydro += ff;
-            el.drag += ff.Dot(dragDir);
+            {
+              const double nu = 1.0e-6;  // water kinematic viscosity [m^2/s]
+              const double Re = vt.Length() * el.lwet / nu;
+
+              double cfLocal = this->cf;  // fallback value
+              if (Re > 1.0e5)
+              {
+                const double x = std::log10(Re) - 2.0;
+                cfLocal = 0.075 / (x * x);
+              }
+
+              const V3 ff = vt * (-0.5 * this->rho * cfLocal * area * vt.Length());
+              apply(ff, cf);
+              fHydro += ff;
+              el.drag += ff.Dot(dragDir);
           }
           if (vn > 0)
           {
@@ -461,11 +526,21 @@ private:
     if (t - this->lastPub < this->pubPeriod)
       return;
     this->lastPub = t;
+
+    if (t - this->lastWaveDebug >= 1.0 && !this->elements.empty())
+    {
+      this->lastWaveDebug = t;
+      gzmsg << "[FlyingBoatHull] wave sample: level="
+            << this->elements.front().level
+            << " eta="
+            << (this->elements.front().level - this->level)
+            << "\n";
+    }
     gz::msgs::Double_V msg;
     for (double x : {t, _vol, _fb, _r, _fp, _fh, -_keel, std::hypot(_vel.X(), _vel.Y()), _awp, _vel.Z()})
       msg.add_data(x);
     for (const auto &el : this->elements)
-      for (double x : {el.vol, el.plateZ, el.drag})
+      for (double x : {el.vol, el.plateZ, el.drag, el.lwet})
         msg.add_data(x);
     this->pub.Publish(msg);
   }
@@ -476,8 +551,11 @@ private:
   std::vector<Element> elements;
   std::map<std::string, double> cdForm;
   double level{0}, rho{998}, cf{0.005}, sideK{1.0}, bluffCd{1.0}, zeta{0.6}, mass{10.0};
-  double pubPeriod{0.02}, lastPub{-1.0}, wakeV0{3.0}, wakeV1{6.0};
+  double pubPeriod{0.02}, lastPub{-1.0}, lastWaveDebug{-1.0}, wakeV0{3.0}, wakeV1{6.0};
   bool chineSep{true};
+  vrx::Wavefield wavefield;
+  std::mutex waveMutex;
+  bool waveReceived{false};
   gz::transport::Node node;
   gz::transport::Node::Publisher pub;
   bool ok{false};
